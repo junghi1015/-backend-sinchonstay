@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
-@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+@SpringBootApplication
 public class CatbellrowApplication {
 
     public static void main(String[] args) {
@@ -12,17 +12,7 @@ public class CatbellrowApplication {
     }
 
 
-//    @Bean
-//    public SqlSessionFactory sqlSessionFactory(DataSource dataSource)throws Exception{
-//        SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
-//        sessionFactory.setDataSource(dataSource);
-//
-//        Resource[] res = new PathMatchingResourcePatternResolver().getResources("classpath:mappers/*Mapper.xml");
-//
-//        sessionFactory.setMapperLocations(res);
-//
-//        return sessionFactory.getObject();
-//    }
+
 
 
 }
