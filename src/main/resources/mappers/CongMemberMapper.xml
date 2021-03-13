@@ -2,19 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!--namespace는 @mapper 붙여 있던 패키지 경로 + class 이름-->
 <mapper namespace="com.example.catbellrow.mapper.CongMemberMapper">
-    <select id="selectMemberCong" resultType="board.board.dto.BoardDto">
+    <select id="selectMemberCong" resultType="com.example.catbellrow.vo.MemberOfCongressManVO">
      <![CDATA[
-        SELECT
-            board_idx,
-            title,
-            hit_cnt,
-            created_datetime
-        FROM
-            t_board
-        WHERE
-            deleted_yn = 'N'
-        ORDER BY board_idx DESC
+        SELECT *
+        from mp;
         ]]>
   </select>
 </mapper>

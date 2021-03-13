@@ -2,6 +2,7 @@ package com.example.catbellrow.service.impl;
 
 import com.example.catbellrow.mapper.CongMemberMapper;
 import com.example.catbellrow.service.MemberOfCongressService;
+import com.example.catbellrow.vo.MemberOfCongressManVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,8 @@ public class MemberOfCongressServiceImpl implements MemberOfCongressService {
 
 
     @Override
-    public String getCongMember() throws Exception {
-        return "tttteeeeesssstttttt";
+    public MemberOfCongressManVO getCongMember() throws Exception {
+
+        return congMemberMapper.selectMemberCong();
     }
 }

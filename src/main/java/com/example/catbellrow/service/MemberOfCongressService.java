@@ -1,7 +1,9 @@
 package com.example.catbellrow.service;
 
+import com.example.catbellrow.vo.MemberOfCongressManVO;
+
 public interface MemberOfCongressService{
 
-     String getCongMember() throws Exception;
+     MemberOfCongressManVO getCongMember() throws Exception;
 
 }
