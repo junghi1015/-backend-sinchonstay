@@ -2,6 +2,7 @@ package com.example.catbellrow.vo;
 
 public class MemberOfCongressVO {
     private String ttts;
+    private String ttfffss;
     private int ggbs;
     private String vvs;
 
