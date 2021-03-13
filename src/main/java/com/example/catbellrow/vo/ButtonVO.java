@@ -1,4 +1,4 @@
-package com.example.catbellrow.vo;튼
+package com.example.catbellrow.vo;
 
 /*
  *
@@ -8,7 +8,7 @@ package com.example.catbellrow.vo;튼
  *
  * */
 
-public class Button {
+public class ButtonVO {
     private String button_name;
     private int bill_type;
 

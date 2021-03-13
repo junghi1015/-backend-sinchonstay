@@ -8,7 +8,7 @@ package com.example.catbellrow.vo;
  *
  * */
 
-public class Member {
+public class MemberVO {
     private int member_code;
     private int member_id;
     private String pwd;

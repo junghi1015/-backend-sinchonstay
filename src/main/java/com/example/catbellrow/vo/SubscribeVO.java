@@ -8,7 +8,7 @@ package com.example.catbellrow.vo;
  *
  * */
 
-public class Subscribe {
+public class SubscribeVO {
     private int bill_code;
 
     public int getBill_code() {
