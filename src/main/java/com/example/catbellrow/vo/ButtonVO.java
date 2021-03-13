@@ -8,7 +8,7 @@ package com.example.catbellrow.vo;
  *
  * */
 
-public class Button {
+public class ButtonVO {
     private String button_name;
     private int bill_type;
 
