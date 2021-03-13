@@ -1,13 +1,7 @@
 package com.example.catbellrow.service;
 
-import org.springframework.stereotype.Service;
+public interface MemberOfCongressService{
 
-@Service
-public class MemberOfCongressService {
-
-    public String getCongMember()
-    {
-        return "tteesstt";
-    }
+     String getCongMember() throws Exception;
 
 }

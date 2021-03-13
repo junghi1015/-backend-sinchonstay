@@ -16,7 +16,7 @@ public class RowSearchController {
     private MemberOfCongressService memberOfCongressService;
 
     @GetMapping(value = "/test", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public void simpleTest(){
+    public void simpleTest() throws Exception{
         System.out.println(memberOfCongressService.getCongMember());
     }
 }

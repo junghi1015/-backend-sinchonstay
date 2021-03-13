@@ -1,4 +1,4 @@
-package com.example.catbellrow.vo;튼
+package com.example.catbellrow.vo;
 
 /*
  *
