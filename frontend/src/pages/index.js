@@ -1,8 +1,24 @@
+import React, {useEffect} from "react";
 import '../resources/css/index.css'
 import 'antd/dist/antd.css';
 import {Button, Input} from "antd";
+import {bsApi} from "../utills/rawApi";
 
 function IndexPage() {
+
+    useEffect(()=>{
+        Script();
+    },[])
+
+
+    const Script = async () => {
+        try {
+            const scriptData = await bsApi.get("/simple/getRaws");
+            console.log(scriptData, 'scriptata!!!')
+        } catch (e) {
+            console.log(e);
+        }
+    };
     return (
         <>
             <div style={{height: 'calc(100vh - 275px)', width: 260, float: 'left'}}>
@@ -19,6 +35,8 @@ function IndexPage() {
                     <Button type={'primary'} style={{borderRadius: 17}}>입법예고만</Button>
                     <Button type={'primary'} style={{borderRadius: 17}}>입법예고만</Button>
                 </div>
+
+
                 <div style={{
                     backgroundColor: '#f4f4f7',
                     borderBottom: '1px solid',
@@ -26,7 +44,6 @@ function IndexPage() {
                     height: 'calc(100vh - 420px)'
                 }}>
                     <div>
-
                         <div style={{
                             height: 180,
                             backgroundColor: '#f4f4f7',
@@ -42,32 +59,6 @@ function IndexPage() {
                         </div>
 
 
-                        <div style={{
-                            height: 180,
-                            backgroundColor: '#f4f4f7',
-                            borderBottom: '1px solid',
-                            borderColor: '#dbdbdd'
-                        }}>
-                            <span>검색</span>
-                            <br/>
-                            <Button type={'primary'} style={{borderRadius: 17}}>입법예고만</Button>
-                            <Button type={'primary'} style={{borderRadius: 17}}>입법예고만</Button>
-                            <Button type={'primary'} style={{borderRadius: 17}}>입법예고만</Button>
-                            <Button type={'primary'} style={{borderRadius: 17}}>입법예고만</Button>
-                        </div>
-                        <div style={{
-                            height: 180,
-                            backgroundColor: '#f4f4f7',
-                            borderBottom: '1px solid',
-                            borderColor: '#dbdbdd'
-                        }}>
-                            <span>검색</span>
-                            <br/>
-                            <Button type={'primary'} style={{borderRadius: 17}}>입법예고만</Button>
-                            <Button type={'primary'} style={{borderRadius: 17}}>입법예고만</Button>
-                            <Button type={'primary'} style={{borderRadius: 17}}>입법예고만</Button>
-                            <Button type={'primary'} style={{borderRadius: 17}}>입법예고만</Button>
-                        </div>
                         <div style={{
                             height: 180,
                             backgroundColor: '#f4f4f7',
