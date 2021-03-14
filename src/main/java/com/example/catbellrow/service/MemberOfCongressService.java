@@ -25,13 +25,8 @@ public interface MemberOfCongressService{
 
      /**
       * @description 검색 결과 조회
-      * @param pram
       */
-     List<RawContentsVO> rawListSearch() throws Exception;
+     List<RawContentsVO> rawListSearch(String keyword) throws Exception;
 
-     /**
-      * @description 최신순 법안 조회
-      */
-     List<RawContentsVO> searchContents() throws Exception;
 
 }

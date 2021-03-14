@@ -21,14 +21,10 @@
     </select>
 
     <!-- 검색 결과 조회 -->
-    <select id="rawListSearch" resultType="com.example.catbellrow.RawContentsVO">
-        SELECT * FROM raw_contents where raw_title like '%pram%'
+    <select id="rawListSearch" parameterType="string" resultType="com.example.catbellrow.vo.RawContentsVO">
+        SELECT * FROM raw_contents where raw_title like CONCAT('%', #{keyword}, '%')
     </select>
 
-    <!-- 최신순 법안 조회 -->
-    <select id="searchContents" resultType="com.example.catbellrow.RawContentsVO">
-        SELECT * FROM raw_contents order by resister_date desc
-    </select>
 
 
 

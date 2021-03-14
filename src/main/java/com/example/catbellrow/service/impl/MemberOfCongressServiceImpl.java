@@ -46,15 +46,9 @@ public class MemberOfCongressServiceImpl implements MemberOfCongressService {
      * @description 검색 결과 조회
      */
     @Override
-    public List<RawContentsVO> rawListSearch() throws Exception {
-        return memberDao.rawListSearch();
+    public List<RawContentsVO> rawListSearch(String keyword) throws Exception {
+        return memberDao.rawListSearch(keyword);
     }
 
-    /**
-     * @description 최신순 법 조회
-     */
-    @Override
-    public List<RawContentsVO> searchContents() throws Exception {
-        return memberDao.searchContents();
-    }
+
 }

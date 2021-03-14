@@ -35,7 +35,7 @@ function IndexPage() {
             }
         }
 
-        const resultData = await bsApi.get('/searchContents', parameter);
+        const resultData = await bsApi.get('/rawListSearch', parameter);
         console.log(resultData, '!!!!')
 
     }

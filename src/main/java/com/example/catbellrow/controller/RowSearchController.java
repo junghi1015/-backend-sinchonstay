@@ -42,18 +42,6 @@ public class RowSearchController {
         return memberOfCongressService.getCongMember();
     }
 
-    /**
-     * @description 법안 정보 리스트 출력
-     */
-    @GetMapping(value = "/getRaws", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<BillVO> getRaws() throws Exception{
-        return memberOfCongressService.getRaws();
-    }
-
-
-
-
-
 
     /**
      * @description 법안 정보 리스트 출력
@@ -74,26 +62,10 @@ public class RowSearchController {
     /**
      * @description 검색 결과 조회
      */
+    @ApiOperation(value = "법안 검색 결과 조", tags = "부가설명")
     @GetMapping(value = "/rawListSearch", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<RawContentsVO> rawListSearch() throws Exception{
-        return memberOfCongressService.rawListSearch();
+    public List<RawContentsVO> rawListSearch(@RequestParam("keyword") String keyword) throws Exception{
+        return memberOfCongressService.rawListSearch(keyword);
     }
 
-    /**
-     * @description 최신순 법안 조회
-     */
-    @GetMapping(value = "/searchContents", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<RawContentsVO> searchContents() throws Exception{
-
-        return memberOfCongressService.searchContents();
-    }
-
-    /**
-     * @description 법안 조회 리스트 결과 카운트
-     */
-    @GetMapping(value = "/searchContents", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public int rawListCount(@RequestParam("keyword") String keyword) throws Exception{
-        System.out.println(keyword + "!!!!!!!!!!!!!!!!");
-        return memberOfCongressService.rawListCount();
-    }
 }
