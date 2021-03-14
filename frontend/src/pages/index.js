@@ -42,8 +42,8 @@ function IndexPage() {
         if(param === ''){
             getRawContents()
         }else{
-        const resultData = await bsApi.get('/rawListSearch', parameter);
-        setRawCentents(resultData.data)
+            const resultData = await bsApi.get('/rawListSearch', parameter);
+            setRawCentents(resultData.data)
         }
     }
 
