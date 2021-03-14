@@ -46,4 +46,20 @@ public class MemberDao {
         // 마지막 단어는 mybatis 아이디값, 그 나머지는 mapper namespace값
         return sqlSession.selectOne("com.example.catbellrow.rawListCount");
     }
+
+    /**
+     * @description 검색 결과 조회
+     */
+    public List<RawContentsVO> rawListSearch() {
+        // 마지막 단어는 mybatis 아이디값, 그 나머지는 mapper namespace값
+        return sqlSession.selectList("com.example.catbellrow.rawListSearch");
+    }
+
+    /**
+     * @description 최신순 법안 조회
+     */
+    public List<RawContentsVO> searchContents() {
+        // 마지막 단어는 mybatis 아이디값, 그 나머지는 mapper namespace값
+        return sqlSession.selectList("com.example.catbellrow.searchContents");
+    }
 }

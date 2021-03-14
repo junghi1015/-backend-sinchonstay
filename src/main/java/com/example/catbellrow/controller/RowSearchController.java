@@ -41,18 +41,6 @@ public class RowSearchController {
         return memberOfCongressService.getCongMember();
     }
 
-    /**
-     * @description 법안 정보 리스트 출력
-     */
-    @GetMapping(value = "/getRaws", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<BillVO> getRaws() throws Exception{
-        return memberOfCongressService.getRaws();
-    }
-
-
-
-
-
 
     /**
      * @description 법안 정보 리스트 출력
@@ -69,4 +57,22 @@ public class RowSearchController {
     public int rawListCount() throws Exception{
         return memberOfCongressService.rawListCount();
     }
+
+    /**
+     * @description 검색 결과 조회
+     */
+    @GetMapping(value = "/rawListSearch", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<RawContentsVO> rawListSearch() throws Exception{
+        return memberOfCongressService.rawListSearch();
+    }
+
+    /**
+     * @description 최신순 법안 조회
+     */
+    @GetMapping(value = "/searchContents", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<RawContentsVO> searchContents() throws Exception{
+
+        return memberOfCongressService.searchContents();
+    }
+
 }

@@ -1,6 +1,5 @@
 package com.example.catbellrow.service;
 
-import com.example.catbellrow.vo.BillVO;
 import com.example.catbellrow.vo.MemberOfCongressManVO;
 import com.example.catbellrow.vo.RawContentsVO;
 
@@ -17,16 +16,22 @@ public interface MemberOfCongressService{
      /**
       * @description 법안 리스트 출력
       */
-     List<BillVO> getRaws() throws Exception;
-
-     /**
-      * @description 법안 리스트 출력
-      */
      List<RawContentsVO> getRawList() throws Exception;
 
      /**
       * @description 법안 조회 리스트 결과 카운트
       */
      int rawListCount() throws Exception;
+
+     /**
+      * @description 검색 결과 조회
+      * @param pram
+      */
+     List<RawContentsVO> rawListSearch() throws Exception;
+
+     /**
+      * @description 최신순 법안 조회
+      */
+     List<RawContentsVO> searchContents() throws Exception;
 
 }

@@ -18,7 +18,7 @@ ___
 
 
 
-작업자 : 김은정
+작업자 : 영지
 * react 
 
 * 로컬에서 작업시 서버 localhost:3000
@@ -42,10 +42,14 @@ catbellRawSearch (루트 디텍터리)
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ dao  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ service    
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ vo  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ㄴ CatbellrowApplication.class  
 
 config/DatabaseConfiguration  --> mybatis를 사용하기 위한 sqlSession 설정 및 마이바티스 설정 파일  
 config/SwaggerConfig --> 프론트엔드와 협업을 위해서 restful데이터 체크  
 config/WebConfig --> cors(교차 출처 리소스 공유) 리액트(브라우저)와 스프링 사이의 통신을 위한 설정  
+
+CatbellrowApplication.class 스프링 스타트 클래스(스타트 메서드)
+
 
 controller --> mvc 구조중 c(controller) 역할을 하는 폴더  
 service --> mvc 구조중 m(model)역할을 하는 폴  
@@ -53,4 +57,21 @@ dao --> mybatis에게 sql를 통한 데이터 요청을 하는 폴더 (이또한
 vo --> getter/setter 역할을 하는 폴더  
   
 resources/application.properties --> db환경설정이 포함되어 있다.(설정 관리 파일)  
-resources/mapper/**.xml --> mybatis 라이브러리를 사용하는 구간(SQL문법을 이요하여 DB와의 데이터 작업을 한다.)  
+resources/mapper/**.xml --> mybatis 라이브러리를 사용하는 구간(SQL문법을 이요하여 DB와의 데이터 작업을 한다.)박
+
+___
+
+> backend start
+ 
+ CatbellrowApplication.class 파일을 (스타트클래스 이자 메서드입니다.) run해준다.  
+ 방법은 우측 상단 스타트버튼 || 해당 클래스의 오른쪽 버튼 클릭후 run
+ 
+> frontend start
+
+frontend의 위치까지 터미널을 이용하여 이동한다.   
+
+> npm run start
+
+ swagger 사용방법
+
+> http://localhost:8080/swagger-ui.html#

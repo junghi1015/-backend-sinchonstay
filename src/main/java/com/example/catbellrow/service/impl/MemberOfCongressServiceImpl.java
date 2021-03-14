@@ -2,13 +2,11 @@ package com.example.catbellrow.service.impl;
 
 import com.example.catbellrow.dao.MemberDao;
 import com.example.catbellrow.service.MemberOfCongressService;
-import com.example.catbellrow.vo.BillVO;
 import com.example.catbellrow.vo.MemberOfCongressManVO;
 import com.example.catbellrow.vo.RawContentsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 
@@ -33,14 +31,6 @@ public class MemberOfCongressServiceImpl implements MemberOfCongressService {
      * @description 법안 리스트 출력
      */
     @Override
-    public List<BillVO> getRaws() throws Exception {
-        return memberDao.selectRaws();
-    }
-
-    /**
-     * @description 법안 리스트 출력
-     */
-    @Override
     public List<RawContentsVO> getRawList() throws Exception {
         return memberDao.getRawList();
     }
@@ -50,5 +40,21 @@ public class MemberOfCongressServiceImpl implements MemberOfCongressService {
     @Override
     public int rawListCount() throws Exception {
         return memberDao.rawListCount();
+    }
+
+    /**
+     * @description 검색 결과 조회
+     */
+    @Override
+    public List<RawContentsVO> rawListSearch() throws Exception {
+        return memberDao.rawListSearch();
+    }
+
+    /**
+     * @description 최신순 법 조회
+     */
+    @Override
+    public List<RawContentsVO> searchContents() throws Exception {
+        return memberDao.searchContents();
     }
 }
