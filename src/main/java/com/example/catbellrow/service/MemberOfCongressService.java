@@ -2,6 +2,7 @@ package com.example.catbellrow.service;
 
 import com.example.catbellrow.vo.BillVO;
 import com.example.catbellrow.vo.MemberOfCongressManVO;
+import com.example.catbellrow.vo.RawContentsVO;
 
 import java.util.List;
 
@@ -17,4 +18,15 @@ public interface MemberOfCongressService{
       * @description 법안 리스트 출력
       */
      List<BillVO> getRaws() throws Exception;
+
+     /**
+      * @description 법안 리스트 출력
+      */
+     List<RawContentsVO> getRawList() throws Exception;
+
+     /**
+      * @description 법안 조회 리스트 결과 카운트
+      */
+     int rawListCount() throws Exception;
+
 }

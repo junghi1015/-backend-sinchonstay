@@ -1,6 +1,8 @@
 import IndexPage from "./pages";
 import Header from "./component/Header";
-import Bottom from "./component/Bottom";
+import './resources/css/index.css';
+import 'antd/dist/antd.css';
+
 
 function App() {
   return (

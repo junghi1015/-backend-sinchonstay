@@ -3,6 +3,7 @@ package com.example.catbellrow.controller;
 import com.example.catbellrow.service.MemberOfCongressService;
 import com.example.catbellrow.vo.BillVO;
 import com.example.catbellrow.vo.MemberOfCongressManVO;
+import com.example.catbellrow.vo.RawContentsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,7 +16,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value = "/simple")
+@RequestMapping(value = "/")
 public class RowSearchController {
 
     @Autowired
@@ -47,4 +48,24 @@ public class RowSearchController {
         return memberOfCongressService.getRaws();
     }
 
+
+
+
+
+
+    /**
+     * @description 법안 정보 리스트 출력
+     */
+    @GetMapping(value = "/rawList", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<RawContentsVO> rawList() throws Exception{
+        return memberOfCongressService.getRawList();
+    }
+
+    /**
+     * @description 법안 조회 리스트 결과 카운트
+     */
+    @GetMapping(value = "/rawListCount", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public int rawListCount() throws Exception{
+        return memberOfCongressService.rawListCount();
+    }
 }

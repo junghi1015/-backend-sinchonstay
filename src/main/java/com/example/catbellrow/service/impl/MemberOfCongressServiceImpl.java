@@ -4,6 +4,7 @@ import com.example.catbellrow.dao.MemberDao;
 import com.example.catbellrow.service.MemberOfCongressService;
 import com.example.catbellrow.vo.BillVO;
 import com.example.catbellrow.vo.MemberOfCongressManVO;
+import com.example.catbellrow.vo.RawContentsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,5 +35,20 @@ public class MemberOfCongressServiceImpl implements MemberOfCongressService {
     @Override
     public List<BillVO> getRaws() throws Exception {
         return memberDao.selectRaws();
+    }
+
+    /**
+     * @description 법안 리스트 출력
+     */
+    @Override
+    public List<RawContentsVO> getRawList() throws Exception {
+        return memberDao.getRawList();
+    }
+    /**
+     * @description 법안 조회 리스트 결과 카운트
+     */
+    @Override
+    public int rawListCount() throws Exception {
+        return memberDao.rawListCount();
     }
 }
