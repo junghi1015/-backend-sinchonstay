@@ -26,7 +26,7 @@ public class MemberOfCongressServiceImpl implements MemberOfCongressService {
     @Override
     public List<MemberOfCongressManVO> getCongMember() throws Exception {
 
-        return memberDao.selectName();
+        return memberDao.getCongMember();
     }
 
     /**

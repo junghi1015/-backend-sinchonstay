@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Input} from "antd";
 import {bsApi} from "../utills/rawApi";
+import '../resources/css/index.css';
 
 function IndexPage() {
     const [rawCentents, setRawCentents] = useState([]);
@@ -23,8 +24,25 @@ function IndexPage() {
         const resultData = await bsApi.get('/rawListCount');
         setCount(resultData.data)
     }
+
+    const handleKeyPress = e => {
+        console.log(e.key);
+        if (e.key === 'Enter') {
+           alert('check')
+        }
+    };
+
+    const useStyle = {
+        borderRadius: 17,
+        margin: 3,
+        padding: 5,
+        paddingLeft: 10,
+        paddingRight: 10
+    }
+
     return (
         <>
+            {/*검색 선택 div*/}
             <div style={{width: 260, float: 'left'}}>
                 <div style={{
                     height: 155,
@@ -37,38 +55,14 @@ function IndexPage() {
                     <div style={{marginTop: 20}}>
                         <Button type={'primary'} style={{borderRadius: 17, margin: 3}}>입법예고만</Button>
                         <Button type={'primary'} style={{borderRadius: 17, margin: 3}}>대안입법만</Button>
-                        <Button type={'primary'} style={{
-                            borderRadius: 17,
-                            margin: 3,
-                            padding: 5,
-                            paddingLeft: 10,
-                            paddingRight: 10
-                        }}>21대</Button>
-                        <Button type={'primary'} style={{
-                            borderRadius: 17,
-                            margin: 3,
-                            padding: 5,
-                            paddingLeft: 10,
-                            paddingRight: 10
-                        }}>20대</Button>
-                        <Button type={'primary'} style={{
-                            borderRadius: 17,
-                            margin: 3,
-                            padding: 5,
-                            paddingLeft: 10,
-                            paddingRight: 10
-                        }}>19대</Button>
-                        <Button type={'primary'} style={{
-                            borderRadius: 17,
-                            margin: 3,
-                            padding: 5,
-                            paddingLeft: 10,
-                            paddingRight: 10
-                        }}>18대</Button>
+                        <Button type={'primary'} style={useStyle}>21대</Button>
+                        <Button type={'primary'}style={useStyle}>20대</Button>
+                        <Button type={'primary'}style={useStyle}>19대</Button>
+                        <Button type={'primary'} style={useStyle}>18대</Button>
                     </div>
                 </div>
 
-
+                {/*입법종류 선택 div*/}
                 <div style={{
                     height: 155,
                     backgroundColor: '#f4f4f7',
@@ -78,45 +72,15 @@ function IndexPage() {
                 }}>
                     <span style={{fontSize: 18, fontWeight: 600}}>입법종류</span>
                     <div style={{marginTop: 20}}>
-                        <Button type={'primary'} style={{
-                            borderRadius: 17,
-                            margin: 3,
-                            padding: 5,
-                            paddingLeft: 10,
-                            paddingRight: 10
-                        }}>전체</Button>
-                        <Button type={'primary'} style={{
-                            borderRadius: 17,
-                            margin: 3,
-                            padding: 5,
-                            paddingLeft: 10,
-                            paddingRight: 10
-                        }}>일부</Button>
-                        <Button type={'primary'} style={{
-                            borderRadius: 17,
-                            margin: 3,
-                            padding: 5,
-                            paddingLeft: 10,
-                            paddingRight: 10
-                        }}>전부</Button>
-                        <Button type={'primary'} style={{
-                            borderRadius: 17,
-                            margin: 3,
-                            padding: 5,
-                            paddingLeft: 10,
-                            paddingRight: 10
-                        }}>폐지</Button>
-                        <Button type={'primary'} style={{
-                            borderRadius: 17,
-                            margin: 3,
-                            padding: 5,
-                            paddingLeft: 10,
-                            paddingRight: 10
-                        }}>제정</Button>
+                        <Button type={'primary'} style={useStyle}>전체</Button>
+                        <Button type={'primary'}style={useStyle}>일부</Button>
+                        <Button type={'primary'} style={useStyle}>전부</Button>
+                        <Button type={'primary'} style={useStyle}>폐지</Button>
+                        <Button type={'primary'} style={useStyle}>제정</Button>
                     </div>
                 </div>
 
-
+                {/*계류의 선택 div*/}
                 <div style={{
                     height: 190,
                     backgroundColor: '#f4f4f7',
@@ -126,59 +90,18 @@ function IndexPage() {
                 }}>
                     <span style={{fontSize: 18, fontWeight: 600}}>계류의안</span>
                     <div style={{marginTop: 20}}>
-                        <Button type={'primary'} style={{
-                            borderRadius: 17,
-                            margin: 3,
-                            padding: 5,
-                            paddingLeft: 10,
-                            paddingRight: 10
-                        }}>전체</Button>
-                        <Button type={'primary'} style={{
-                            borderRadius: 17,
-                            margin: 3,
-                            padding: 5,
-                            paddingLeft: 10,
-                            paddingRight: 10
-                        }}>접수</Button>
-                        <Button type={'primary'} style={{
-                            borderRadius: 17,
-                            margin: 3,
-                            padding: 5,
-                            paddingLeft: 10,
-                            paddingRight: 10
-                        }}>소관위접수</Button>
-                        <Button type={'primary'} style={{
-                            borderRadius: 17,
-                            margin: 3,
-                            padding: 5,
-                            paddingLeft: 10,
-                            paddingRight: 10
-                        }}>소관위심사</Button>
-                        <Button type={'primary'} style={{
-                            borderRadius: 17,
-                            margin: 3,
-                            padding: 5,
-                            paddingLeft: 10,
-                            paddingRight: 10
-                        }}>체계자구심사</Button>
-                        <Button type={'primary'} style={{
-                            borderRadius: 17,
-                            margin: 3,
-                            padding: 5,
-                            paddingLeft: 10,
-                            paddingRight: 10
-                        }}>본회의부의</Button>
-                        <Button type={'primary'} style={{
-                            borderRadius: 17,
-                            margin: 3,
-                            padding: 5,
-                            paddingLeft: 10,
-                            paddingRight: 10
-                        }}>본회의불부의</Button>
+                        <Button type={'primary'} style={useStyle}>전체</Button>
+                        <Button type={'primary'} style={useStyle}>접수</Button>
+                        <Button type={'primary'} style={useStyle}>소관위접수</Button>
+                        <Button type={'primary'} style={useStyle}>소관위심사</Button>
+                        <Button type={'primary'} style={useStyle}>체계자구심사</Button>
+                        <Button type={'primary'} style={useStyle}>본회의부의</Button>
+                        <Button type={'primary'} style={useStyle}>본회의불부의</Button>
                     </div>
                 </div>
 
 
+                {/*처리의안 선택 div*/}
                 <div style={{
                     height: 160,
                     backgroundColor: '#f4f4f7',
@@ -188,55 +111,13 @@ function IndexPage() {
                 }}>
                     <span style={{fontSize: 18, fontWeight: 500}}>처리의안</span>
                     <div style={{marginTop: 20}}>
-                        <Button type={'primary'} style={{
-                            borderRadius: 17,
-                            margin: 3,
-                            padding: 5,
-                            paddingLeft: 10,
-                            paddingRight: 10
-                        }}>전체</Button>
-                        <Button type={'primary'} style={{
-                            borderRadius: 17,
-                            margin: 3,
-                            padding: 5,
-                            paddingLeft: 10,
-                            paddingRight: 10
-                        }}>원안가결</Button>
-                        <Button type={'primary'} style={{
-                            borderRadius: 17,
-                            margin: 3,
-                            padding: 5,
-                            paddingLeft: 10,
-                            paddingRight: 10
-                        }}>수정가결</Button>
-                        <Button type={'primary'} style={{
-                            borderRadius: 17,
-                            margin: 3,
-                            padding: 5,
-                            paddingLeft: 10,
-                            paddingRight: 10
-                        }}>대안반영</Button>
-                        <Button type={'primary'} style={{
-                            borderRadius: 17,
-                            margin: 3,
-                            padding: 5,
-                            paddingLeft: 10,
-                            paddingRight: 10
-                        }}>철회</Button>
-                        <Button type={'primary'} style={{
-                            borderRadius: 17,
-                            margin: 3,
-                            padding: 5,
-                            paddingLeft: 10,
-                            paddingRight: 10
-                        }}>부결</Button>
-                        <Button type={'primary'} style={{
-                            borderRadius: 17,
-                            margin: 3,
-                            padding: 5,
-                            paddingLeft: 10,
-                            paddingRight: 10
-                        }}>폐기</Button>
+                        <Button type={'primary'} style={useStyle}>전체</Button>
+                        <Button type={'primary'} style={useStyle}>원안가결</Button>
+                        <Button type={'primary'} style={useStyle}>수정가결</Button>
+                        <Button type={'primary'} style={useStyle}>대안반영</Button>
+                        <Button type={'primary'}style={useStyle}>철회</Button>
+                        <Button type={'primary'}style={useStyle}>부결</Button>
+                        <Button type={'primary'} style={useStyle}>폐기</Button>
                     </div>
                 </div>
 
@@ -252,7 +133,7 @@ function IndexPage() {
                         style={{float: 'right', borderRadius: 15, backgroundColor: '#f4f4f7'}}>제외 검색어</Button></div>
 
                     <br/>
-                    <Input/>
+                    <Input onKeyPress={handleKeyPress} />
                     <Button type={'primary'} style={{borderRadius: 7, width: '100%', marginTop: 10}}>검색</Button>
                     <Button type={'primary'} style={{borderRadius: 7, width: '100%', marginTop: 7}}>구독신청</Button>
                 </div>
@@ -312,7 +193,7 @@ function IndexPage() {
                                 padding: 2
                             }}>&nbsp;{value.raw_num}&nbsp;</span>
                                 <span className={'rawKind'}
-                                      style={{backgroundColor:  value.raw_kind === '일부' ? 'blue' : '#d21d62'}}
+                                      style={{backgroundColor: value.raw_kind === '일부' ? 'blue' : '#d21d62'}}
                                 >{value.raw_kind}</span>
                             </div>
                             <div style={{height: 35, fontSize: 18, fontWeight: 500, paddingTop: 2}}>
@@ -335,10 +216,6 @@ function IndexPage() {
                         <div style={{float: "left", width: 130, height: 115}}>
                             <div style={{marginTop: 40, textAlign: "center", fontSize: 15}}>
                                 <span>#{value.keyword}</span>
-                                {/*<span>#처분</span>*/}
-                                {/*<span>#국민</span>*/}
-                                {/*<span>#개최</span>*/}
-                                {/*<span>#행정청</span>*/}
                             </div>
                         </div>
 
@@ -350,14 +227,9 @@ function IndexPage() {
                         </div>
                     </div>
                 })}
+            </div>
+        </>
+    );
+}
 
-
-
-
-                    </div>
-
-                    </>
-                    );
-                }
-
-                export default IndexPage;
+export default IndexPage;

@@ -21,6 +21,7 @@ public class RawContentsVO {
     private String keyword;
     private String raw_title;
     private String regist_data;
+    private String join_member;
 
     public int getRaw_season() {
         return raw_season;
@@ -93,4 +94,8 @@ public class RawContentsVO {
     public void setRegist_data(String regist_data) {
         this.regist_data = regist_data;
     }
+
+    public String getJoin_member() { return join_member; }
+
+    public void setJoin_member(String join_member) { this.join_member = join_member; }
 }

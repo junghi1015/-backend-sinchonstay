@@ -4,6 +4,7 @@ import com.example.catbellrow.service.MemberOfCongressService;
 import com.example.catbellrow.vo.BillVO;
 import com.example.catbellrow.vo.MemberOfCongressManVO;
 import com.example.catbellrow.vo.RawContentsVO;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -34,7 +35,7 @@ public class RowSearchController {
     /**
      * @description 국회의원 전체 리스트 출력
      */
-    @GetMapping(value = "/test", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value = "/getCongMember", produces = {MediaType.APPLICATION_JSON_VALUE})
     //ResponseEntity 는 HTTP 요청(Request) 또는 응답(Response)에 해당하는 HttpHeader와 HttpBody를 포함하는 클래스이다.
     public List<MemberOfCongressManVO> simpleTest() throws Exception{
         return memberOfCongressService.getCongMember();

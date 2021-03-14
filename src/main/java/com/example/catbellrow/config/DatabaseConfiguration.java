@@ -25,11 +25,18 @@ public class DatabaseConfiguration {
     ApplicationContext applicationContext;
 
 
+
+//    hikari 라는 여석은 Connection pool을 말한다
+
+//    사용자의 요청에 따라 Connection 을 생성하다 보면 많은 수의 연결이 발생했을 때 서버에 과부하가 걸리게 된다 .
+//    이러한 상황을 방지하기 위해 미리 일정수의 Connection 을 만들어 pool 에 담아 뒀다가
+//    사용자의 요청이 발생하면 연결을 해주고 연결종료 시 pool 에 다시 반 환하여 보관하는 것이다 .
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource.hikari")
     public HikariConfig hikariConfig() {
         return new HikariConfig();
     }
+
 
     @Bean
     public DataSource dataSource() {
@@ -38,6 +45,8 @@ public class DatabaseConfiguration {
         return dataSource;
     }
 
+//    실직적으로 MySql 서버와 mybatis를 연결해주는 건  sqlSessionFactory 이 객체이다(스프링 지원 라이브러리임)
+//    이를 이용해 mybatis를 사용할수 있게 경로를 지정하여 사용하는 구간이다.(이 프로젝트에서는 resources/mapper/testDB.xml 을 사용하고 있다.)
     @Bean
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();

@@ -35,3 +35,11 @@
     padding-right: 5px;
     color: white;
 }
+
+.leftListButton{
+    border-radius: 17px;
+    margin: 3px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}

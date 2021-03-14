@@ -7,24 +7,24 @@ package com.example.catbellrow.vo;
  *
  * */
 public class MemberOfCongressManVO {
-    private int mp_code;
-    private String mp_name;
+    private int member_index;
+    private String name;
     private String party;
 
-    public int getMp_code() {
-        return mp_code;
+    public int getMember_index() {
+        return member_index;
     }
 
-    public void setMp_code(int mp_code) {
-        this.mp_code = mp_code;
+    public void setMember_index(int member_index) {
+        this.member_index = member_index;
     }
 
-    public String getMp_name() {
-        return mp_name;
+    public String getName() {
+        return name;
     }
 
-    public void setMp_name(String mp_name) {
-        this.mp_name = mp_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getParty() {
