@@ -10,7 +10,7 @@ package com.example.catbellrow.vo;
 
 public class MemberVO {
     private int member_code;
-    private int member_id;
+    private String member_id;
     private String pwd;
     private String email;
 
@@ -22,11 +22,11 @@ public class MemberVO {
         this.member_code = member_code;
     }
 
-    public int getMember_id() {
+    public String getMember_id() {
         return member_id;
     }
 
-    public void setMember_id(int member_id) {
+    public void setMember_id(String member_id) {
         this.member_id = member_id;
     }
 

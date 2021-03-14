@@ -72,13 +72,15 @@ function IndexPage() {
 
 
     //로그인
-    const onFinish = (values) => {
+    const onFinish = async (values) => {
         let parameter = {
             params: {
-                values
+                username : values.username,
+                password : values.password
             }
         }
-        console.log(parameter,'!!2222')
+        const resultData = await bsApi.get('/login', parameter);
+        console.log(resultData,'true or false')
     };
 
 

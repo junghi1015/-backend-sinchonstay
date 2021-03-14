@@ -2,6 +2,7 @@ package com.example.catbellrow.dao;
 
 import com.example.catbellrow.vo.BillVO;
 import com.example.catbellrow.vo.MemberOfCongressManVO;
+import com.example.catbellrow.vo.MemberVO;
 import com.example.catbellrow.vo.RawContentsVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,5 +51,19 @@ public class MemberDao {
      */
     public List<RawContentsVO> rawListSearch(String keyword) {
         return sqlSession.selectList("com.example.catbellrow.rawListSearch", keyword);
+    }
+
+    /**
+     * @description 로그인 조회
+     */
+    public int login(MemberVO vo) {
+        return sqlSession.selectOne("com.example.catbellrow.login", vo);
+    }
+
+    /**
+     * @description 최신순 법안 조회
+     */
+    public List<RawContentsVO> rawListUptodate(String pram) {
+        return sqlSession.selectList("com.example.catbellrow.rawListUptodate", pram);
     }
 }

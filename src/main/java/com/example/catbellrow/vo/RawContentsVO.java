@@ -87,13 +87,9 @@ public class RawContentsVO {
         this.raw_title = raw_title;
     }
 
-    public String getRegist_data() {
-        return regist_data;
-    }
+    public String getRegist_data() {  return regist_data; }
 
-    public void setRegist_data(String regist_data) {
-        this.regist_data = regist_data;
-    }
+    public void setRegist_data(String regist_data) { this.regist_data = regist_data; }
 
     public String getJoin_member() { return join_member; }
 

@@ -3,6 +3,7 @@ package com.example.catbellrow.service.impl;
 import com.example.catbellrow.dao.MemberDao;
 import com.example.catbellrow.service.MemberOfCongressService;
 import com.example.catbellrow.vo.MemberOfCongressManVO;
+import com.example.catbellrow.vo.MemberVO;
 import com.example.catbellrow.vo.RawContentsVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,5 +51,20 @@ public class MemberOfCongressServiceImpl implements MemberOfCongressService {
         return memberDao.rawListSearch(keyword);
     }
 
+    /**
+     * @description 로그인 조회
+     */
+    @Override
+    public int login(MemberVO vo) throws Exception {
+        return memberDao.login(vo);
+    }
+
+    /**
+     * @description 최신순 법안 조회
+     */
+    @Override
+    public List<RawContentsVO> rawListUptodate(String pram) throws Exception {
+        return memberDao.rawListUptodate(pram);
+    }
 
 }
