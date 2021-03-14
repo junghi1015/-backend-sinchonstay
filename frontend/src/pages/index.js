@@ -4,18 +4,27 @@ import {LockOutlined, SearchOutlined, UserOutlined} from '@ant-design/icons';
 import {bsApi} from "../utills/rawApi";
 import '../resources/css/index.css';
 import catbellImg from "../resources/image/catbellImg.png";
+import { Radio } from 'antd';
 
 function IndexPage() {
     const [rawCentents, setRawCentents] = useState([]);
     const [count, setCount] = useState(0);
     const [keyword, setKeyword] = useState('');
-    const [loginState, setLoginState] = useState(false);
+    const [loginState, setLoginState] = useState(true);
+    const [works, setWords] = useState('');
 
 
     useEffect(() => {
         getRawContents()
         getRawCount()
     }, [])
+
+
+
+    const checkId = (e) => {
+    console.log(e.target.value,'22;;;ss')
+        setWords(e.target.value)
+    }
 
     // rawListCount
     const getRawContents = async () => {
@@ -38,7 +47,8 @@ function IndexPage() {
 
         let parameter = {
             params: {
-                keyword: param
+                keyword: param,
+                works : works
             }
         }
         console.log(parameter, '?????')
@@ -93,9 +103,11 @@ function IndexPage() {
     const useStyle = {
         borderRadius: 17,
         margin: 3,
-        padding: 5,
-        paddingLeft: 10,
-        paddingRight: 10
+        border: 0,
+        padding: 3,
+        paddingLeft: 13,
+        paddingRight: 10,
+        paddingTop: 2
     }
 
     return (
@@ -131,80 +143,27 @@ function IndexPage() {
                 {/*검색 선택 div*/}
                 <div style={{width: 260, float: 'left'}}>
                     <div style={{
-                        height: 155,
+                        height: 100,
                         backgroundColor: '#f4f4f7',
                         borderBottom: '1px solid',
                         borderColor: '#dbdbdd',
-                        padding: 10
+                        padding: 10,
+
                     }}>
                         <span style={{fontSize: 18, fontWeight: 600}}>검색</span>
-                        <div style={{marginTop: 20}}>
-                            <Button type={'primary'} style={{borderRadius: 17, margin: 3}}>입법예고만</Button>
-                            <Button type={'primary'} style={{borderRadius: 17, margin: 3}}>대안입법만</Button>
-                            <Button type={'primary'} style={useStyle}>21대</Button>
-                            <Button type={'primary'} style={useStyle}>20대</Button>
-                            <Button type={'primary'} style={useStyle}>19대</Button>
-                            <Button type={'primary'} style={useStyle}>18대</Button>
-                        </div>
-                    </div>
 
-                    {/*입법종류 선택 div*/}
-                    <div style={{
-                        height: 155,
-                        backgroundColor: '#f4f4f7',
-                        borderBottom: '1px solid',
-                        borderColor: '#dbdbdd',
-                        padding: 10
-                    }}>
-                        <span style={{fontSize: 18, fontWeight: 600}}>입법종류</span>
-                        <div style={{marginTop: 20}}>
-                            <Button type={'primary'} style={useStyle}>전체</Button>
-                            <Button type={'primary'} style={useStyle}>일부</Button>
-                            <Button type={'primary'} style={useStyle}>전부</Button>
-                            <Button type={'primary'} style={useStyle}>폐지</Button>
-                            <Button type={'primary'} style={useStyle}>제정</Button>
-                        </div>
-                    </div>
-
-                    {/*계류의 선택 div*/}
-                    <div style={{
-                        height: 190,
-                        backgroundColor: '#f4f4f7',
-                        borderBottom: '1px solid',
-                        borderColor: '#dbdbdd',
-                        padding: 10
-                    }}>
-                        <span style={{fontSize: 18, fontWeight: 600}}>계류의안</span>
-                        <div style={{marginTop: 20}}>
-                            <Button type={'primary'} style={useStyle}>전체</Button>
-                            <Button type={'primary'} style={useStyle}>접수</Button>
-                            <Button type={'primary'} style={useStyle}>소관위접수</Button>
-                            <Button type={'primary'} style={useStyle}>소관위심사</Button>
-                            <Button type={'primary'} style={useStyle}>체계자구심사</Button>
-                            <Button type={'primary'} style={useStyle}>본회의부의</Button>
-                            <Button type={'primary'} style={useStyle}>본회의불부의</Button>
-                        </div>
-                    </div>
-
-
-                    {/*처리의안 선택 div*/}
-                    <div style={{
-                        height: 160,
-                        backgroundColor: '#f4f4f7',
-                        borderBottom: '1px solid',
-                        borderColor: '#dbdbdd',
-                        padding: 10
-                    }}>
-                        <span style={{fontSize: 18, fontWeight: 500}}>처리의안</span>
-                        <div style={{marginTop: 20}}>
-                            <Button type={'primary'} style={useStyle}>전체</Button>
-                            <Button type={'primary'} style={useStyle}>원안가결</Button>
-                            <Button type={'primary'} style={useStyle}>수정가결</Button>
-                            <Button type={'primary'} style={useStyle}>대안반영</Button>
-                            <Button type={'primary'} style={useStyle}>철회</Button>
-                            <Button type={'primary'} style={useStyle}>부결</Button>
-                            <Button type={'primary'} style={useStyle}>폐기</Button>
-                        </div>
+                        <Radio.Group onChange={checkId}  buttonStyle="solid" style={{marginTop: 12}}>
+                            <Radio.Button style={useStyle} value="21">21대</Radio.Button>
+                            <Radio.Button style={useStyle} value="20">20대</Radio.Button>
+                            <Radio.Button style={useStyle} value="19">19대</Radio.Button>
+                            <Radio.Button style={useStyle} value="18">18대</Radio.Button>
+                        </Radio.Group>
+                        {/*<div style={{marginTop: 20}}>*/}
+                        {/*    <Button type={'primary'} style={useStyle} value={'21'} onClick={() => checkId('21')}>21대</Button>*/}
+                        {/*    <Button type={'primary'} style={useStyle} value={'20'}>20대</Button>*/}
+                        {/*    <Button type={'primary'} style={useStyle} value={'19'}>19대</Button>*/}
+                        {/*    <Button type={'primary'} style={useStyle} value={'18'}>18대</Button>*/}
+                        {/*</div>*/}
                     </div>
 
 
@@ -215,14 +174,12 @@ function IndexPage() {
                         borderColor: '#dbdbdd',
                         padding: 10
                     }}>
-                        <div><span style={{fontSize: 18, fontWeight: 500}}>검색어</span><Button
-                            style={{float: 'right', borderRadius: 15, backgroundColor: '#f4f4f7'}}>제외 검색어</Button></div>
+                        <div><span style={{fontSize: 18, fontWeight: 500}}>검색어</span></div>
 
                         <br/>
                         <Input onKeyPress={handleKeyPress} onChange={scriptWord}/>
                         <Button type={'primary'} style={{borderRadius: 7, width: '100%', marginTop: 10}}
                                 onClick={searchKeyword}>검색</Button>
-                        <Button type={'primary'} style={{borderRadius: 7, width: '100%', marginTop: 7}}>구독신청</Button>
                     </div>
 
                 </div>
