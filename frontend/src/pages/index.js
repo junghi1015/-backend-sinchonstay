@@ -34,10 +34,12 @@ function IndexPage() {
                 keyword: param
             }
         }
-
+        if(param === ''){
+            getRawContents()
+        }else{
         const resultData = await bsApi.get('/rawListSearch', parameter);
-        console.log(resultData, '!!!!')
-
+        setRawCentents(resultData.data)
+        }
     }
 
     /**
@@ -205,7 +207,6 @@ function IndexPage() {
 
 
                 {rawCentents.map((value, index) => {
-                    console.log(value, '!!!!!')
 
 
                     return <div style={{height: 125, borderBottom: '1px solid', borderColor: '#e5e5e5'}}>
