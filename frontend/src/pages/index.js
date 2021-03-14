@@ -9,7 +9,7 @@ function IndexPage() {
     const [rawCentents, setRawCentents] = useState([]);
     const [count, setCount] = useState(0);
     const [keyword, setKeyword] = useState('');
-    const [loginState, setLoginState] = useState(true);
+    const [loginState, setLoginState] = useState(false);
 
 
     useEffect(() => {
@@ -30,6 +30,9 @@ function IndexPage() {
         setCount(resultData.data)
     }
 
+    const logout = () => {
+        setLoginState(false)
+    }
 
     const onSearch = async (param) => {
 
@@ -79,7 +82,12 @@ function IndexPage() {
             }
         }
         const resultData = await bsApi.get('/login', parameter);
-        console.log(resultData, 'true or false')
+        if(resultData.data == false){
+            alert('로그인 정보가 잘못 되었습니다.')
+        }else{
+            setLoginState(resultData.data)
+        }
+
     };
 
     const useStyle = {
@@ -101,7 +109,7 @@ function IndexPage() {
                         </div>
                         <div className={'memberState'}>
                             <div style={{float: 'right'}}>내정보</div>
-                            <div style={{float: 'right', marginRight: 30}}>로그아웃</div>
+                            <div style={{float: 'right', marginRight: 30, cursor:"pointer"}}onClick={logout}>로그아웃</div>
                         </div>
                     </div>
                     <div style={{height: 100}}>
@@ -310,7 +318,7 @@ function IndexPage() {
                     </>
 
                 :
-                <Card>
+                <Card title={'로그인'} style={{width: 500, margin:'0px auto', marginTop: 140}}>
                     <Form
                         name="normal_login"
                         className="login-form"
@@ -346,8 +354,8 @@ function IndexPage() {
                             />
                         </Form.Item>
 
-                        <Form.Item>
-                            <Button type="primary" htmlType="submit" style={{marginLeft: 200}}>
+                        <Form.Item style={{textAlign: 'center'}}>
+                            <Button type="primary" htmlType="submit" >
                                 Log in
                             </Button>
                         </Form.Item>
