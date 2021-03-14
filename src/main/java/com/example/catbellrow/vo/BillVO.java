@@ -2,7 +2,7 @@ package com.example.catbellrow.vo;
 
 /*
  *
- * title : 법안머시기 getter/setter
+ * title : 법안 getter/setter
  * author : 정효인
  * date : 2021.03.13
  *

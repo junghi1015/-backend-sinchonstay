@@ -10,6 +10,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/*
+ *
+ * title : 서비스 추상화 푸는 구간
+ * author : 정효인
+ * date : 2021.03.14
+ *
+ * */
 
 // service 의 추상화(간소화)된 메서드를 자세하게 정의해야하는 구간
 @Service
@@ -66,5 +73,30 @@ public class MemberOfCongressServiceImpl implements MemberOfCongressService {
     public List<RawContentsVO> rawListUptodate(String pram) throws Exception {
         return memberDao.rawListUptodate(pram);
     }
+
+    /**
+     * @description 사이드 버튼 조회
+     */
+    @Override
+    public List<RawContentsVO> subListSearch(String pram) throws Exception {
+        return memberDao.subListSearch(pram);
+    }
+
+    /**
+     * @description 대수만으로 조회
+     */
+    @Override
+    public List<RawContentsVO> rawListSeason(String pram) throws Exception {
+        return memberDao.rawListSeason(pram);
+    }
+
+    /**
+     * @description 대수+ 키워드로 조회
+     */
+    @Override
+    public List<RawContentsVO> rawListAll(RawContentsVO vo) throws Exception {
+        return memberDao.rawListAll(vo);
+    }
+
 
 }

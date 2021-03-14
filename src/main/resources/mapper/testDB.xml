@@ -35,7 +35,20 @@
         SELECT * FROM raw_contents where raw_title like CONCAT('%', #{keyword}, '%') order by resist_date desc;
     </select>
 
+    <!-- 사이드 버튼 조회 -->
+    <select id="subListSearch" parameterType="string" resultType="com.example.catbellrow.vo.RawContentsVO">
 
+    </select>
+
+    <!-- 대수만으로 조회 -->
+    <select id="rawListSeason" parameterType="string" resultType="com.example.catbellrow.vo.RawContentsVO">
+        select * from raw_contents where raw_season= #{works};
+    </select>
+
+    <!-- 대수 + 키워드로 조회 -->
+    <select id="rawListAll" parameterType="com.example.catbellrow.vo.RawContentsVO" resultType="com.example.catbellrow.vo.RawContentsVO">
+        select * from raw_contents where raw_season = #{raw_season} and raw_title like CONCAT('%', #{keyword}, '%') order by resist_date desc;
+    </select>
 
 
 </mapper>

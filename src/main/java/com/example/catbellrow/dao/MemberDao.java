@@ -10,6 +10,15 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+
+/*
+ *
+ * title : data db access
+ * author : 정효인
+ * date : 2021.03.14
+ *
+ * */
+
 //mybatis에(sql 쿼리 작성구간)에 작업을 요청하는 구간
 @Repository
 public class MemberDao {
@@ -65,5 +74,26 @@ public class MemberDao {
      */
     public List<RawContentsVO> rawListUptodate(String pram) {
         return sqlSession.selectList("com.example.catbellrow.rawListUptodate", pram);
+    }
+
+    /**
+     * @description 사이드 버튼 조회
+     */
+    public List<RawContentsVO> subListSearch(String pram) {
+        return sqlSession.selectList("com.example.catbellrow.subListSearch", pram);
+    }
+
+    /**
+     * @description 대수만으로 조회
+     */
+    public List<RawContentsVO> rawListSeason(String pram) {
+        return sqlSession.selectList("com.example.catbellrow.rawListSeason", pram);
+    }
+
+    /**
+     * @description 대수 + 키워로 조회
+     */
+    public List<RawContentsVO> rawListAll(RawContentsVO vo) {
+        return sqlSession.selectList("com.example.catbellrow.rawListAll", vo);
     }
 }

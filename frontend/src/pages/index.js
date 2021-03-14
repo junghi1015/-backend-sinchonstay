@@ -16,7 +16,7 @@ function IndexPage() {
 
     useEffect(() => {
         getRawContents()
-        getRawCount()
+
     }, [])
 
 
@@ -30,14 +30,10 @@ function IndexPage() {
     const getRawContents = async () => {
 
         const resultData = await bsApi.get('/rawList');
+        setCount(resultData.data.length)
         setRawCentents(resultData.data)
     }
 
-    const getRawCount = async () => {
-
-        const resultData = await bsApi.get('/rawListCount');
-        setCount(resultData.data)
-    }
 
     const logout = () => {
         setLoginState(false)
@@ -51,14 +47,12 @@ function IndexPage() {
                 works : works
             }
         }
-        console.log(parameter, '?????')
-        if (param === '') {
-            getRawContents()
-        } else {
+
             const resultData = await bsApi.get('/rawListSearch', parameter);
+        setCount(resultData.data.length)
             setRawCentents(resultData.data)
         }
-    }
+
 
     /**
      * @description 엔터키 입력시 검색 기능 작동

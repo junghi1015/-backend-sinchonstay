@@ -17,6 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/*
+ *
+ * title : 컨트롤러
+ * author : 정효인
+ * date : 2021.03.14
+ *
+ * */
 
 @RestController
 @RequestMapping(value = "/")
@@ -24,13 +31,6 @@ public class RowSearchController {
 
     @Autowired
     private MemberOfCongressService memberOfCongressService;
-
-
-//|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-//|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-//|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-
-
 
     // value는 프론트에서 접근하려는 주소, produces는 데이터 교류 타입을 지정(json)
 
@@ -65,8 +65,28 @@ public class RowSearchController {
      */
     @ApiOperation(value = "법안 검색 결과 조회", tags = "법안 검색 결과 조회 ")
     @GetMapping(value = "/rawListSearch", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<RawContentsVO> rawListSearch(@RequestParam("keyword") String keyword) throws Exception{
-        return memberOfCongressService.rawListSearch(keyword);
+    public List<RawContentsVO> rawListSearch(@RequestParam("keyword") String keyword, @RequestParam("works") String works) throws Exception{
+
+        List<RawContentsVO> resultData = null;
+
+        if(works == "" && keyword == ""){
+            // 전체조회
+            System.out.println("둘다 널값이라 전체출력합니다.");
+            resultData = memberOfCongressService.getRawList();
+        }else if(works != "" && keyword == ""){
+            System.out.println("works만.");
+            resultData = memberOfCongressService.rawListSeason(works);
+        }else if(works == "" && keyword != "") {
+            System.out.println("keyword.");
+            resultData = memberOfCongressService.rawListSearch(keyword);
+        }else {
+            RawContentsVO vo = new RawContentsVO();
+            vo.setKeyword(keyword);
+            int work = Integer.parseInt(works);
+            vo.setRaw_season(work);
+            resultData = memberOfCongressService.rawListAll(vo);
+        }
+    return resultData;
     }
 
     /**
@@ -96,5 +116,6 @@ public class RowSearchController {
     public List<RawContentsVO> rawListUptodate(@RequestParam("pram") String pram) throws Exception{
         return memberOfCongressService.rawListUptodate(pram);
     }
+
 
 }

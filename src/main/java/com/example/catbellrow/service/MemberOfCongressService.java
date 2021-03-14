@@ -6,6 +6,15 @@ import com.example.catbellrow.vo.RawContentsVO;
 
 import java.util.List;
 
+/*
+ *
+ * title : mvc 서비스 구간
+ * author : 정효인
+ * date : 2021.03.14
+ *
+ * */
+
+
 //인터페이스 ::: 서비스 추상화 구간 (자세한 로직은 impl파일에서 정의한다 (@override))
 public interface MemberOfCongressService{
 
@@ -38,4 +47,19 @@ public interface MemberOfCongressService{
       * @description 최신순 법안 조회
       */
      List<RawContentsVO> rawListUptodate(String pram) throws Exception;
+
+     /**
+      * @description 사이드 버튼 조회
+      */
+     List<RawContentsVO> subListSearch(String pram) throws Exception;
+
+     /**
+      * @description 대수만으로 조회
+      */
+     List<RawContentsVO> rawListSeason(String pram) throws Exception;
+
+     /**
+      * @description 대수 + 키워드 조회
+      */
+     List<RawContentsVO> rawListAll(RawContentsVO vo) throws Exception;
 }
