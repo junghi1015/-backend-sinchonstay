@@ -7,6 +7,7 @@ function App() {
    <div style={{width: 1080, margin: '0px auto'}}>
        <Header/>
      <IndexPage/>
+
    </div>
   );
 }
