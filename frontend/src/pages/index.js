@@ -6,6 +6,7 @@ import '../resources/css/index.css';
 function IndexPage() {
     const [rawCentents, setRawCentents] = useState([]);
     const [count, setCount] = useState(0);
+    const [keyword, setKeyword] = useState(0);
 
     useEffect(() => {
         getRawContents()
@@ -25,12 +26,42 @@ function IndexPage() {
         setCount(resultData.data)
     }
 
+
+    const onSearch = async (param) => {
+
+        let parameter = {
+            params: {
+                keyword: param
+            }
+        }
+
+        const resultData = await bsApi.get('/searchContents', parameter);
+        console.log(resultData, '!!!!')
+
+    }
+
+    /**
+     * @description 엔터키 입력시 검색 기능 작동
+     */
     const handleKeyPress = e => {
         console.log(e.key);
         if (e.key === 'Enter') {
-           alert('check')
+            onSearch(keyword)
         }
     };
+
+
+    /**
+     * @검색버튼 클릭시 요청 이벤트 작동
+     */
+    const searchKeyword = () => {
+        onSearch(keyword)
+    }
+
+    const scriptWord = (e) => {
+        setKeyword(e.target.value)
+    }
+
 
     const useStyle = {
         borderRadius: 17,
@@ -56,8 +87,8 @@ function IndexPage() {
                         <Button type={'primary'} style={{borderRadius: 17, margin: 3}}>입법예고만</Button>
                         <Button type={'primary'} style={{borderRadius: 17, margin: 3}}>대안입법만</Button>
                         <Button type={'primary'} style={useStyle}>21대</Button>
-                        <Button type={'primary'}style={useStyle}>20대</Button>
-                        <Button type={'primary'}style={useStyle}>19대</Button>
+                        <Button type={'primary'} style={useStyle}>20대</Button>
+                        <Button type={'primary'} style={useStyle}>19대</Button>
                         <Button type={'primary'} style={useStyle}>18대</Button>
                     </div>
                 </div>
@@ -73,7 +104,7 @@ function IndexPage() {
                     <span style={{fontSize: 18, fontWeight: 600}}>입법종류</span>
                     <div style={{marginTop: 20}}>
                         <Button type={'primary'} style={useStyle}>전체</Button>
-                        <Button type={'primary'}style={useStyle}>일부</Button>
+                        <Button type={'primary'} style={useStyle}>일부</Button>
                         <Button type={'primary'} style={useStyle}>전부</Button>
                         <Button type={'primary'} style={useStyle}>폐지</Button>
                         <Button type={'primary'} style={useStyle}>제정</Button>
@@ -115,8 +146,8 @@ function IndexPage() {
                         <Button type={'primary'} style={useStyle}>원안가결</Button>
                         <Button type={'primary'} style={useStyle}>수정가결</Button>
                         <Button type={'primary'} style={useStyle}>대안반영</Button>
-                        <Button type={'primary'}style={useStyle}>철회</Button>
-                        <Button type={'primary'}style={useStyle}>부결</Button>
+                        <Button type={'primary'} style={useStyle}>철회</Button>
+                        <Button type={'primary'} style={useStyle}>부결</Button>
                         <Button type={'primary'} style={useStyle}>폐기</Button>
                     </div>
                 </div>
@@ -133,8 +164,9 @@ function IndexPage() {
                         style={{float: 'right', borderRadius: 15, backgroundColor: '#f4f4f7'}}>제외 검색어</Button></div>
 
                     <br/>
-                    <Input onKeyPress={handleKeyPress} />
-                    <Button type={'primary'} style={{borderRadius: 7, width: '100%', marginTop: 10}}>검색</Button>
+                    <Input onKeyPress={handleKeyPress} onChange={scriptWord}/>
+                    <Button type={'primary'} style={{borderRadius: 7, width: '100%', marginTop: 10}}
+                            onClick={searchKeyword}>검색</Button>
                     <Button type={'primary'} style={{borderRadius: 7, width: '100%', marginTop: 7}}>구독신청</Button>
                 </div>
 
