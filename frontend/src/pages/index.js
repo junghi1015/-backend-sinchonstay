@@ -1,12 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Input} from "antd";
+import {Button, Checkbox, Form, Input, Modal} from 'antd';
+import {LockOutlined, SearchOutlined, UserOutlined} from '@ant-design/icons';
 import {bsApi} from "../utills/rawApi";
 import '../resources/css/index.css';
+import catbellImg from "../resources/image/catbellImg.png";
 
 function IndexPage() {
     const [rawCentents, setRawCentents] = useState([]);
     const [count, setCount] = useState(0);
-    const [keyword, setKeyword] = useState(0);
+    const [keyword, setKeyword] = useState('');
+    const [isModalVisible, setIsModalVisible] = useState(true);
+
 
     useEffect(() => {
         getRawContents()
@@ -34,6 +38,7 @@ function IndexPage() {
                 keyword: param
             }
         }
+        console.log(parameter,'?????')
         if(param === ''){
             getRawContents()
         }else{
@@ -65,6 +70,31 @@ function IndexPage() {
     }
 
 
+
+    //로그인
+    const onFinish = (values) => {
+        let parameter = {
+            params: {
+                values
+            }
+        }
+        console.log(parameter,'!!2222')
+    };
+
+
+    // |||||||||||||||모||||||||||||||||||
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+
+    const handleOk = () => {
+        setIsModalVisible(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
+
     const useStyle = {
         borderRadius: 17,
         margin: 3,
@@ -75,6 +105,16 @@ function IndexPage() {
 
     return (
         <>
+            <div style={{borderBottom:'1px solid', borderColor:'#e5e5e5'}}>
+                <div style={{height: 45, borderBottom:'1px solid', borderColor:'#e5e5e5'}}>
+                    <div className={'realtimeTitle'}>4차 산업혁명, 초연결성(Hyper-Connectivity), 지능정보화 등으로 다양하게 표현되는 최근 디지털 전환(Digital Transformation)의 추세</div>
+                    <div className={'memberState'}><div style={{float:'right'}}>내정보</div><div style={{float:'right', marginRight: 30}} onClick={showModal}>로그아웃</div></div>
+                </div>
+                <div style={{height: 100}}>
+                    <div style={{width:380}}><img src={catbellImg} width={140} height={85}style={{float:'left', padding:5}}/> <div className={'headerFont'}>피드</div><div className={'headerFont'} style={{marginLeft:-20}}>전문검색</div></div>
+                    <Input placeholder="통합 검색" prefix={<SearchOutlined />} style={{width:'calc(100% - 380px - 400px)', float:'right', height: 35, marginTop: 35, marginRight:20, borderRadius:7}}/>
+                </div>
+            </div>
             {/*검색 선택 div*/}
             <div style={{width: 260, float: 'left'}}>
                 <div style={{
@@ -260,6 +300,50 @@ function IndexPage() {
                         </div>
                     </div>
                 })}
+
+                <Modal title="로그인" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                    <Form
+                        name="normal_login"
+                        className="login-form"
+                        initialValues={{
+                            remember: true,
+                        }}
+                        onFinish={onFinish}
+                    >
+                        <Form.Item
+                            name="username"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your Username!',
+                                },
+                            ]}
+                        >
+                            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+                        </Form.Item>
+                        <Form.Item
+                            name="password"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your Password!',
+                                },
+                            ]}
+                        >
+                            <Input
+                                prefix={<LockOutlined />}
+                                type="password"
+                                placeholder="Password"
+                            />
+                        </Form.Item>
+
+                        <Form.Item>
+                            <Button type="primary" htmlType="submit" style={{marginLeft: 200}} >
+                                Log in
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                </Modal>
             </div>
         </>
     );
