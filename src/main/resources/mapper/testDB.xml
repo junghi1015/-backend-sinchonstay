@@ -25,6 +25,16 @@
         SELECT * FROM raw_contents where raw_title like CONCAT('%', #{keyword}, '%')
     </select>
 
+    <!-- 로그인 조회 -->
+    <select id="login" parameterType="com.example.catbellrow.vo.MemberVO" resultType="int">
+        SELECT count(*) FROM member where member_id = #{member_id}  and pwd = #{pwd}
+    </select>
+
+    <!-- 최신순 조회 -->
+    <select id="rawListUptodate" parameterType="string" resultType="com.example.catbellrow.vo.RawContentsVO">
+        SELECT * FROM raw_contents where raw_title like CONCAT('%', #{keyword}, '%') order by resist_date desc;
+    </select>
+
 
 
 

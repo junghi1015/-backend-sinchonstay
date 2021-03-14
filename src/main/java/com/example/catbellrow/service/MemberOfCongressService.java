@@ -1,6 +1,7 @@
 package com.example.catbellrow.service;
 
 import com.example.catbellrow.vo.MemberOfCongressManVO;
+import com.example.catbellrow.vo.MemberVO;
 import com.example.catbellrow.vo.RawContentsVO;
 
 import java.util.List;
@@ -28,5 +29,13 @@ public interface MemberOfCongressService{
       */
      List<RawContentsVO> rawListSearch(String keyword) throws Exception;
 
+     /**
+      * @description 로그인 / 유저 조회
+      */
+     int login(MemberVO vo) throws Exception;
 
+     /**
+      * @description 최신순 법안 조회
+      */
+     List<RawContentsVO> rawListUptodate(String pram) throws Exception;
 }

@@ -3,6 +3,7 @@ package com.example.catbellrow.controller;
 import com.example.catbellrow.service.MemberOfCongressService;
 import com.example.catbellrow.vo.BillVO;
 import com.example.catbellrow.vo.MemberOfCongressManVO;
+import com.example.catbellrow.vo.MemberVO;
 import com.example.catbellrow.vo.RawContentsVO;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,10 +63,38 @@ public class RowSearchController {
     /**
      * @description 검색 결과 조회
      */
-    @ApiOperation(value = "법안 검색 결과 조", tags = "부가설명")
+    @ApiOperation(value = "법안 검색 결과 조회", tags = "법안 검색 결과 조회 ")
     @GetMapping(value = "/rawListSearch", produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<RawContentsVO> rawListSearch(@RequestParam("keyword") String keyword) throws Exception{
         return memberOfCongressService.rawListSearch(keyword);
+    }
+
+    /**
+     * @description 로그인 / 유저 조회
+     */
+    @ApiOperation(value = "로그인 / 유저 조회", tags = "유저이름, 패스워드 들어오면 대조해서 페이지 출력값 1,0 둘중하나 리턴 ")
+    @GetMapping(value = "/login", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public boolean login(@RequestParam("username") String username, @RequestParam("password") String pwd) throws Exception{
+        MemberVO vo = new MemberVO();
+        vo.setMember_id(username);
+        vo.setPwd(pwd);
+        int resultParam = memberOfCongressService.login(vo);
+        boolean resultData = false;
+        if(resultParam == 0){
+            resultData = false;
+        }else if(resultParam == 1){
+            resultData = true;
+        }
+        return resultData;
+    }
+
+    /**
+     * @description 최신순 법안 조회
+     */
+    @ApiOperation(value = "최신순 법안 조회", tags = "최신순 버튼누르면 검색결과 + 날짜역순 정렬")
+    @GetMapping(value = "/rawListUptodate", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<RawContentsVO> rawListUptodate(@RequestParam("pram") String pram) throws Exception{
+        return memberOfCongressService.rawListUptodate(pram);
     }
 
 }
