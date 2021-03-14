@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -40,6 +41,18 @@ public class RowSearchController {
     public List<MemberOfCongressManVO> simpleTest() throws Exception{
         return memberOfCongressService.getCongMember();
     }
+
+    /**
+     * @description 법안 정보 리스트 출력
+     */
+    @GetMapping(value = "/getRaws", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<BillVO> getRaws() throws Exception{
+        return memberOfCongressService.getRaws();
+    }
+
+
+
+
 
 
     /**
@@ -75,4 +88,12 @@ public class RowSearchController {
         return memberOfCongressService.searchContents();
     }
 
+    /**
+     * @description 법안 조회 리스트 결과 카운트
+     */
+    @GetMapping(value = "/searchContents", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public int rawListCount(@RequestParam("keyword") String keyword) throws Exception{
+        System.out.println(keyword + "!!!!!!!!!!!!!!!!");
+        return memberOfCongressService.rawListCount();
+    }
 }
