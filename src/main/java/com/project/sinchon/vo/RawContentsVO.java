@@ -1,6 +1,4 @@
-package com.example.catbellrow.vo;
-
-import java.util.Date;
+package com.project.sinchon.vo;
 
 
 /*

@@ -1,4 +1,4 @@
-package com.example.catbellrow;
+package com.project.sinchon;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ import java.sql.Connection;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-class CatbellrowApplicationTests {
+class sinchonApplicationTests {
 
     @Autowired
     private SqlSessionFactory sqlSessionFactory;

@@ -1,4 +1,4 @@
-package com.example.catbellrow.vo;
+package com.project.sinchon.vo;
 /*
  *
  * title : 국회의 getter/setter

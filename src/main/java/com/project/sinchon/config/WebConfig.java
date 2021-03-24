@@ -1,4 +1,4 @@
-package com.example.catbellrow.config;
+package com.project.sinchon.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

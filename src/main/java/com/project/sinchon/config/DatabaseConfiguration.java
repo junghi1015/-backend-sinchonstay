@@ -1,4 +1,4 @@
-package com.example.catbellrow.config;
+package com.project.sinchon.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -20,7 +20,7 @@ import javax.sql.DataSource;
  *
  * title : 데이터베이스 설정구간(커넥션 풀)
  * author : 정효인
- * date : 2021.03.13
+ * date : 2021.03.24
  *
  * */
 

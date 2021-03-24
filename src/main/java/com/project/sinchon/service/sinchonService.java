@@ -1,8 +1,8 @@
-package com.example.catbellrow.service;
+package com.project.sinchon.service;
 
-import com.example.catbellrow.vo.MemberOfCongressManVO;
-import com.example.catbellrow.vo.MemberVO;
-import com.example.catbellrow.vo.RawContentsVO;
+import com.project.sinchon.vo.MemberOfCongressManVO;
+import com.project.sinchon.vo.MemberVO;
+import com.project.sinchon.vo.RawContentsVO;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import java.util.List;
 
 
 //인터페이스 ::: 서비스 추상화 구간 (자세한 로직은 impl파일에서 정의한다 (@override))
-public interface MemberOfCongressService{
+public interface sinchonService {
 
      /**
       * @description 국회의원 리스트 출력
