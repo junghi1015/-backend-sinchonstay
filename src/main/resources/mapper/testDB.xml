@@ -2,52 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.sinchon">
-    <select id="getCongMember" resultType="com.project.sinchon.vo.MemberOfCongressManVO">
-        SELECT * FROM member_congress
-    </select>
 
-    <select id="selectRaws" resultType="com.project.sinchon.vo.BillVO">
-        SELECT * FROM bill
-    </select>
-
-<!-- 법안 리스트 출력 -->
-    <select id="getRawList" resultType="com.project.sinchon.vo.RawContentsVO">
-        SELECT * FROM raw_contents
-    </select>
-
-<!-- 법안 리스트 출력 -->
-    <select id="rawListCount" resultType="int">
-        SELECT COUNT(*) FROM raw_contents
-    </select>
-
-    <!-- 검색 결과 조회 -->
-    <select id="rawListSearch" parameterType="string" resultType="com.project.sinchon.vo.RawContentsVO">
-        SELECT * FROM raw_contents where raw_title like CONCAT('%', #{keyword}, '%')
-    </select>
-
-    <!-- 로그인 조회 -->
-    <select id="login" parameterType="com.project.sinchon.vo.MemberVO" resultType="int">
-        SELECT count(*) FROM member where member_id = #{member_id}  and pwd = #{pwd}
-    </select>
-
-    <!-- 최신순 조회 -->
-    <select id="rawListUptodate" parameterType="string" resultType="com.project.sinchon.vo.RawContentsVO">
-        SELECT * FROM raw_contents where raw_title like CONCAT('%', #{keyword}, '%') order by resist_date desc;
-    </select>
-
-    <!-- 사이드 버튼 조회 -->
-    <select id="subListSearch" parameterType="string" resultType="com.project.sinchon.vo.RawContentsVO">
-
-    </select>
-
-    <!-- 대수만으로 조회 -->
-    <select id="rawListSeason" parameterType="string" resultType="com.project.sinchon.vo.RawContentsVO">
-        select * from raw_contents where raw_season= #{works};
-    </select>
-
-    <!-- 대수 + 키워드로 조회 -->
-    <select id="rawListAll" parameterType="com.project.sinchon.vo.RawContentsVO" resultType="com.project.sinchon.vo.RawContentsVO">
-        select * from raw_contents where raw_season = #{raw_season} and raw_title like CONCAT('%', #{keyword}, '%') order by resist_date desc;
+<!-- 방 리스트 출력 -->
+    <select id="getRoomList" resultType="com.project.sinchon.vo.roomVO">
+        SELECT * FROM room
     </select>
 
 

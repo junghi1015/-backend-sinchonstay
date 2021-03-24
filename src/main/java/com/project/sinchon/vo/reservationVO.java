@@ -9,14 +9,21 @@ package com.project.sinchon.vo;
 
 public class reservationVO {
     private int res_ID;
-    private date res_date;
-    private date stay_start_day;
-    private date stay_end_day;
+    private String res_date;
+    private String stay_start_day;
+    private String stay_end_day;
     private int res_state;
     private String res_firstname;
     private String res_lastname;
     private int sex;
     private String country;
+    private int age_group;
+    private String stay_purpose;
+    private int num_of_guests;
+    private String NA_foods;
+    private String etc;
+    private String user_ID;
+    private int room_ID;
 
     public int getRes_ID() {
         return res_ID;
@@ -26,27 +33,27 @@ public class reservationVO {
         this.res_ID = res_ID;
     }
 
-    public date getRes_date() {
+    public String getRes_date() {
         return res_date;
     }
 
-    public void setRes_date(date res_date) {
+    public void setRes_date(String res_date) {
         this.res_date = res_date;
     }
 
-    public date getStay_start_day() {
+    public String getStay_start_day() {
         return stay_start_day;
     }
 
-    public void setStay_start_day(date stay_start_day) {
+    public void setStay_start_day(String stay_start_day) {
         this.stay_start_day = stay_start_day;
     }
 
-    public date getStay_end_day() {
+    public String getStay_end_day() {
         return stay_end_day;
     }
 
-    public void setStay_end_day(date stay_end_day) {
+    public void setStay_end_day(String stay_end_day) {
         this.stay_end_day = stay_end_day;
     }
 
@@ -145,13 +152,5 @@ public class reservationVO {
     public void setRoom_ID(int room_ID) {
         this.room_ID = room_ID;
     }
-
-    private int age_group;
-    private String stay_purpose;
-    private int num_of_guests;
-    private String NA_foods;
-    private String etc;
-    private String user_ID;
-    private int room_ID;
 
 }

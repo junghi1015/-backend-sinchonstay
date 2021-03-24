@@ -1,6 +1,8 @@
 package com.project.sinchon.controller;
 
-import com.project.sinchon.vo.*;
+import com.project.sinchon.service.SinchonService;
+import com.project.sinchon.vo.TestVO;
+import com.project.sinchon.vo.roomVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,16 +24,16 @@ import java.util.List;
 public class SinchonController {
 
     @Autowired
-    private sinchonService sinchonService;
+    private SinchonService SinchonService;
 
     /**
      * @description 방 리스트 출력
      */
     @GetMapping(value = "/roomlist", produces = {MediaType.APPLICATION_JSON_VALUE})
     //ResponseEntity 는 HTTP 요청(Request) 또는 응답(Response)에 해당하는 HttpHeader와 HttpBody를 포함하는 클래스이다.
-    public List<MemberOfCongressManVO> simpleTest() throws Exception{
+    public List<roomVO> getRoomList() throws Exception{
 
-        return memberOfCongressService.getCongMember();
+        return SinchonService.getRoomList();
     }
 
     @GetMapping(value = "/test", produces = {MediaType.APPLICATION_JSON_VALUE})

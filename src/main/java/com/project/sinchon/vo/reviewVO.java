@@ -12,6 +12,11 @@ public class reviewVO {
     private String user_ID;
     private int res_ID;
     private String contents;
+    private int grade;
+    private String reg_date;
+    private int regroup_ID;
+    private int reparents_ID;
+    private int depth;
 
     public int getReview_ID() {
         return review_ID;
@@ -53,11 +58,11 @@ public class reviewVO {
         this.grade = grade;
     }
 
-    public date getReg_date() {
+    public String getReg_date() {
         return reg_date;
     }
 
-    public void setReg_date(date reg_date) {
+    public void setReg_date(String reg_date) {
         this.reg_date = reg_date;
     }
 
@@ -85,10 +90,5 @@ public class reviewVO {
         this.depth = depth;
     }
 
-    private int grade;
-    private date reg_date;
-    private int regroup_ID;
-    private int reparents_ID;
-    private int depth;
 
 }

@@ -1,9 +1,6 @@
 package com.project.sinchon.dao;
 
-import com.project.sinchon.vo.BillVO;
-import com.project.sinchon.vo.MemberOfCongressManVO;
-import com.project.sinchon.vo.MemberVO;
-import com.project.sinchon.vo.RawContentsVO;
+import com.project.sinchon.vo.*;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -27,73 +24,11 @@ public class SinchonDao {
     private SqlSession sqlSession;
 
     /**
-     * @description 국회의원 리스트 출력
+     * @description 방 리스트 출력
      */
-    public List<MemberOfCongressManVO> getCongMember(){
+    public List<roomVO> getRoomList(){
         // 마지막 단어는 mybatis 아이디값, 그 나머지는 mapper namespace값
-        return sqlSession.selectList( "com.example.catbellrow.getCongMember");
+        return sqlSession.selectList( "com.project.sinchon.getRoomList");
     }
 
-    /**
-     * @description 법안 리스트 출력
-     */
-    public List<BillVO> selectRaws() {
-        return sqlSession.selectList("com.example.catbellrow.selectRaws");
-    }
-
-    /**
-     * @description 법안 리스트 출력
-     */
-    public List<RawContentsVO> getRawList() {
-        return sqlSession.selectList("com.example.catbellrow.getRawList");
-    }
-    /**
-     * @description 법안 리스트 출력
-     */
-    public int rawListCount() {
-
-        return sqlSession.selectOne("com.example.catbellrow.rawListCount");
-    }
-
-    /**
-     * @description 검색 결과 조회
-     */
-    public List<RawContentsVO> rawListSearch(String keyword) {
-        return sqlSession.selectList("com.example.catbellrow.rawListSearch", keyword);
-    }
-
-    /**
-     * @description 로그인 조회
-     */
-    public int login(MemberVO vo) {
-        return sqlSession.selectOne("com.example.catbellrow.login", vo);
-    }
-
-    /**
-     * @description 최신순 법안 조회
-     */
-    public List<RawContentsVO> rawListUptodate(String pram) {
-        return sqlSession.selectList("com.example.catbellrow.rawListUptodate", pram);
-    }
-
-    /**
-     * @description 사이드 버튼 조회
-     */
-    public List<RawContentsVO> subListSearch(String pram) {
-        return sqlSession.selectList("com.example.catbellrow.subListSearch", pram);
-    }
-
-    /**
-     * @description 대수만으로 조회
-     */
-    public List<RawContentsVO> rawListSeason(String pram) {
-        return sqlSession.selectList("com.example.catbellrow.rawListSeason", pram);
-    }
-
-    /**
-     * @description 대수 + 키워로 조회
-     */
-    public List<RawContentsVO> rawListAll(RawContentsVO vo) {
-        return sqlSession.selectList("com.example.catbellrow.rawListAll", vo);
-    }
 }

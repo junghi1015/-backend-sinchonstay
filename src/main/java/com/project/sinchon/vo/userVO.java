@@ -11,8 +11,8 @@ public class userVO {
     private String user_ID;
     private String pwd;
     private String email;
-    private date reg_date;
-    private date update_date;
+    private String reg_date;
+    private String update_date;
     private boolean ishost;
 
     public String getUser_ID() {
@@ -39,19 +39,19 @@ public class userVO {
         this.email = email;
     }
 
-    public date getReg_date() {
+    public String getReg_date() {
         return reg_date;
     }
 
-    public void setReg_date(date reg_date) {
+    public void setReg_date(String reg_date) {
         this.reg_date = reg_date;
     }
 
-    public date getUpdate_date() {
+    public String getUpdate_date() {
         return update_date;
     }
 
-    public void setUpdate_date(date update_date) {
+    public void setUpdate_date(String update_date) {
         this.update_date = update_date;
     }
 
