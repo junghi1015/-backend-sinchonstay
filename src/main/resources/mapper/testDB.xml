@@ -3,10 +3,16 @@
 
 <mapper namespace="com.project.sinchon">
 
-<!-- 방 리스트 출력 -->
+    <!-- 방 리스트 출력 -->
     <select id="getRoomList" resultType="com.project.sinchon.vo.roomVO">
-        SELECT * FROM room
+        SELECT * FROM room;
     </select>
+
+    <!-- 리뷰 리스트 출력 -->
+    <select id="getReviewList" resultType="com.project.sinchon.vo.reviewVO">
+        SELECT * FROM review;
+    </select>
+
 
 
 </mapper>

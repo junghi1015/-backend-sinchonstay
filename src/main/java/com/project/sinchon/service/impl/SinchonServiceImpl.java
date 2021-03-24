@@ -2,6 +2,7 @@ package com.project.sinchon.service.impl;
 
 import com.project.sinchon.dao.SinchonDao;
 import com.project.sinchon.service.SinchonService;
+import com.project.sinchon.vo.reviewVO;
 import com.project.sinchon.vo.roomVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,5 +33,13 @@ public class SinchonServiceImpl implements SinchonService {
         return SinchonDao.getRoomList();
     }
 
+    /**
+     * @description 리뷰 리스트 출력
+     */
+    @Override
+    public List<reviewVO> getReviewList() throws Exception {
+
+        return SinchonDao.getReviewList();
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.project.sinchon.service;
 
+import com.project.sinchon.vo.reviewVO;
 import com.project.sinchon.vo.roomVO;
 
 import java.util.List;
@@ -20,6 +21,11 @@ public interface SinchonService {
       * @description 방 리스트 출력
       */
      List<roomVO> getRoomList() throws Exception;
+
+     /**
+      * @description 리뷰 리스트 출력
+      */
+     List<reviewVO> getReviewList() throws Exception;
 
 
 }

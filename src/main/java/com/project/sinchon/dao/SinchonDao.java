@@ -31,4 +31,12 @@ public class SinchonDao {
         return sqlSession.selectList( "com.project.sinchon.getRoomList");
     }
 
+    /**
+     * @description 리뷰 리스트 출력
+     */
+    public List<reviewVO> getReviewList(){
+        // 마지막 단어는 mybatis 아이디값, 그 나머지는 mapper namespace값
+        return sqlSession.selectList( "com.project.sinchon.getReviewList");
+    }
+
 }
