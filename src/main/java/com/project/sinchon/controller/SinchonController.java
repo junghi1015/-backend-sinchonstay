@@ -2,6 +2,7 @@ package com.project.sinchon.controller;
 
 import com.project.sinchon.service.SinchonService;
 import com.project.sinchon.vo.TestVO;
+import com.project.sinchon.vo.reservationVO;
 import com.project.sinchon.vo.reviewVO;
 import com.project.sinchon.vo.roomVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,15 @@ public class SinchonController {
     public List<reviewVO> getReviewList() throws Exception{
 
         return SinchonService.getReviewList();
+    }
+
+    /**
+     * @description 관리자 페이지 고객관리 - 최근 예약순
+     */
+    @GetMapping(value = "/host_res_manage", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<reservationVO> getResManage() throws Exception{
+
+        return SinchonService.getResManage();
     }
 
     @GetMapping(value = "/test", produces = {MediaType.APPLICATION_JSON_VALUE})

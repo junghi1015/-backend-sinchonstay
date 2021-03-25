@@ -2,6 +2,7 @@ package com.project.sinchon.service.impl;
 
 import com.project.sinchon.dao.SinchonDao;
 import com.project.sinchon.service.SinchonService;
+import com.project.sinchon.vo.reservationVO;
 import com.project.sinchon.vo.reviewVO;
 import com.project.sinchon.vo.roomVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,4 +43,12 @@ public class SinchonServiceImpl implements SinchonService {
         return SinchonDao.getReviewList();
     }
 
+    /**
+     * @description 관리자 페이지 고객관리 - 최근 예약순
+     */
+    @Override
+    public List<reservationVO> getResManage() throws Exception {
+
+        return SinchonDao.getResManage();
+    }
 }

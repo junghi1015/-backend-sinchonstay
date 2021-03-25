@@ -1,5 +1,6 @@
 package com.project.sinchon.service;
 
+import com.project.sinchon.vo.reservationVO;
 import com.project.sinchon.vo.reviewVO;
 import com.project.sinchon.vo.roomVO;
 
@@ -26,6 +27,11 @@ public interface SinchonService {
       * @description 리뷰 리스트 출력
       */
      List<reviewVO> getReviewList() throws Exception;
+
+     /**
+      * @description 관리자 페이지 고객관리 - 최근 예약순
+      */
+     List<reservationVO> getResManage() throws Exception;
 
 
 }

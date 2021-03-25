@@ -10,7 +10,12 @@
 
     <!-- 리뷰 리스트 출력 -->
     <select id="getReviewList" resultType="com.project.sinchon.vo.reviewVO">
-        SELECT * FROM review;
+        SELECT * FROM review where grade = 5 order by reg_date desc;
+    </select>
+
+    <!-- 관리자 페이지 고객관리 - 최근 예약순  -->
+    <select id="getResManage" resultType="com.project.sinchon.vo.reservationVO">
+        SELECT * FROM reservation r inner join user u on r.user_ID = u.user_ID where r.res_state = 1 order by res_date desc
     </select>
 
 
