@@ -1,5 +1,7 @@
 package com.project.sinchon.vo;
 
+import java.util.Date;
+
 /**
  * title : 유저 getter/setter
  * author : 정효인
@@ -11,8 +13,8 @@ public class userVO {
     private String user_ID;
     private String pwd;
     private String email;
-    private String reg_date;
-    private String update_date;
+    private Date reg_date;
+    private Date update_date;
     private boolean ishost;
 
     public String getUser_ID() {
@@ -39,19 +41,19 @@ public class userVO {
         this.email = email;
     }
 
-    public String getReg_date() {
+    public Date getReg_date() {
         return reg_date;
     }
 
-    public void setReg_date(String reg_date) {
+    public void setReg_date(Date reg_date) {
         this.reg_date = reg_date;
     }
 
-    public String getUpdate_date() {
+    public Date getUpdate_date() {
         return update_date;
     }
 
-    public void setUpdate_date(String update_date) {
+    public void setUpdate_date(Date update_date) {
         this.update_date = update_date;
     }
 

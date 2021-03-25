@@ -1,5 +1,7 @@
 package com.project.sinchon.vo;
 
+import java.util.Date;
+
 /**
  * title : 예약 getter/setter
  * author : 정효인
@@ -9,9 +11,9 @@ package com.project.sinchon.vo;
 
 public class reservationVO {
     private int res_ID;
-    private String res_date;
-    private String stay_start_day;
-    private String stay_end_day;
+    private Date res_date;
+    private Date stay_start_day;
+    private Date stay_end_day;
     private int res_state;
     private String res_firstname;
     private String res_lastname;
@@ -33,27 +35,27 @@ public class reservationVO {
         this.res_ID = res_ID;
     }
 
-    public String getRes_date() {
+    public Date getRes_date() {
         return res_date;
     }
 
-    public void setRes_date(String res_date) {
+    public void setRes_date(Date res_date) {
         this.res_date = res_date;
     }
 
-    public String getStay_start_day() {
+    public Date getStay_start_day() {
         return stay_start_day;
     }
 
-    public void setStay_start_day(String stay_start_day) {
+    public void setStay_start_day(Date stay_start_day) {
         this.stay_start_day = stay_start_day;
     }
 
-    public String getStay_end_day() {
+    public Date getStay_end_day() {
         return stay_end_day;
     }
 
-    public void setStay_end_day(String stay_end_day) {
+    public void setStay_end_day(Date stay_end_day) {
         this.stay_end_day = stay_end_day;
     }
 
@@ -152,5 +154,4 @@ public class reservationVO {
     public void setRoom_ID(int room_ID) {
         this.room_ID = room_ID;
     }
-
 }

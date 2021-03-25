@@ -1,5 +1,7 @@
 package com.project.sinchon.vo;
 
+import java.util.Date;
+
 /**
  * title : 리뷰 getter/setter
  * author : 정효인
@@ -13,7 +15,7 @@ public class reviewVO {
     private int res_ID;
     private String contents;
     private int grade;
-    private String reg_date;
+    private Date reg_date;
     private int regroup_ID;
     private int reparents_ID;
     private int depth;
@@ -58,11 +60,11 @@ public class reviewVO {
         this.grade = grade;
     }
 
-    public String getReg_date() {
+    public Date getReg_date() {
         return reg_date;
     }
 
-    public void setReg_date(String reg_date) {
+    public void setReg_date(Date reg_date) {
         this.reg_date = reg_date;
     }
 
@@ -89,6 +91,4 @@ public class reviewVO {
     public void setDepth(int depth) {
         this.depth = depth;
     }
-
-
 }
