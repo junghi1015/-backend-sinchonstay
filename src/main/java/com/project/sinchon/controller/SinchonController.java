@@ -49,7 +49,7 @@ public class SinchonController {
     /**
      * @description 관리자 페이지 고객관리 - 최근 예약순
      */
-    @GetMapping(value = "/host_res_manage", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value = "/host_guest_manage", produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<reservationVO> getResManage() throws Exception{
 
         return SinchonService.getResManage();

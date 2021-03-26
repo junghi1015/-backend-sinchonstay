@@ -1,5 +1,7 @@
 package com.project.sinchon.vo;
 
+import lombok.Data;
+
 import java.util.Date;
 
 /**
@@ -8,7 +10,7 @@ import java.util.Date;
  * date : 2021.03.24
  *
  * */
-
+@Data
 public class userVO {
     private String user_ID;
     private String pwd;

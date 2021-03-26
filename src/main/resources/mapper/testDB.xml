@@ -12,10 +12,20 @@
     <select id="getReviewList" resultType="com.project.sinchon.vo.reviewVO">
         SELECT * FROM review where grade = 5 order by reg_date desc;
     </select>
-
+    
     <!-- 관리자 페이지 고객관리 - 최근 예약순  -->
-    <select id="getResManage" resultType="com.project.sinchon.vo.reservationVO">
-        SELECT * FROM reservation r inner join user u on r.user_ID = u.user_ID where r.res_state = 1 order by res_date desc
+    <resultMap type="com.project.sinchon.vo.userVO" id="userVO">
+        <result column="USER_ID" property="user_ID"/>
+        <result column="EMAIL" property="email"/>
+    </resultMap>
+
+    <resultMap type="com.project.sinchon.vo.reservationVO" id="reservationVO">
+        <result column="SEX" property="sex"/>
+        <collection property="userVO" resultMap="userVO"/>
+    </resultMap>
+
+    <select id="getResManage" parameterType="com.project.sinchon.vo.reservationVO" resultMap="reservationVO">
+        SELECT CONCAT(r.res_lastname, r.res_firstname) , (r.stay_end_day - r.stay_start_day), r.country, r.age_group, r.sex, u.email, r.etc FROM reservation r inner join user u on r.user_ID = u.user_ID where r.res_state = 1 order by r.res_date desc
     </select>
 
 

@@ -1,5 +1,7 @@
 package com.project.sinchon.vo;
 
+import lombok.Data;
+
 import java.util.Date;
 
 /**
@@ -8,7 +10,7 @@ import java.util.Date;
  * date : 2021.03.24
  *
  * */
-
+@Data
 public class reservationVO {
     private int res_ID;
     private Date res_date;
@@ -26,6 +28,15 @@ public class reservationVO {
     private String etc;
     private String user_ID;
     private int room_ID;
+    private userVO userVO;
+
+    public com.project.sinchon.vo.userVO getUserVO() {
+        return userVO;
+    }
+
+    public void setUserVO(com.project.sinchon.vo.userVO userVO) {
+        this.userVO = userVO;
+    }
 
     public int getRes_ID() {
         return res_ID;
