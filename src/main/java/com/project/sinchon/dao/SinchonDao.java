@@ -28,7 +28,7 @@ public class SinchonDao {
      */
     public List<roomVO> getRoomList(){
         // 마지막 단어는 mybatis 아이디값, 그 나머지는 mapper namespace값
-        return sqlSession.selectList( "com.project.sinchon.getRoomList");
+        return sqlSession.selectList( "com.project.sinchon.getList");
     }
 
     /**

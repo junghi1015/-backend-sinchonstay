@@ -3,18 +3,28 @@ package com.project.sinchon.vo;
  * title : 방 getter/setter
  * author : 정효인
  * date : 2021.03.24
- *
- * */
+ * update log 
+ * 		2021.04.10 : 여인준 / DB재설계에 따른 capacity 속성 및 getter setter 추가  
+ **/
 public class roomVO {
     private int room_ID;
     private String room_type;
     private String room_img;
     private String bed;
     private String bathroom;
+    private	int capacity;
     private int price_day;
     private int price_month;
 
-    public int getRoom_ID() {
+    public int getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
+	public int getRoom_ID() {
         return room_ID;
     }
 

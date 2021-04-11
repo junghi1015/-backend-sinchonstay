@@ -1,7 +1,7 @@
 package com.project.sinchon.controller;
 
 import com.project.sinchon.service.SinchonService;
-import com.project.sinchon.vo.TestVO;
+
 import com.project.sinchon.vo.reservationVO;
 import com.project.sinchon.vo.reviewVO;
 import com.project.sinchon.vo.roomVO;
@@ -55,14 +55,6 @@ public class SinchonController {
         return SinchonService.getResManage();
     }
 
-    @GetMapping(value = "/test", produces = {MediaType.APPLICATION_JSON_VALUE})
-    //ResponseEntity 는 HTTP 요청(Request) 또는 응답(Response)에 해당하는 HttpHeader와 HttpBody를 포함하는 클래스이다.
-    public TestVO simpleTest() throws Exception{
-        TestVO vo = new TestVO();
-        vo.setParam1("톄쓰트1");
-        vo.setParam2("톄쓰트2");
-        return vo;
-    }
 
 
 
