@@ -18,7 +18,7 @@ import com.project.sinchon.vo.roomVO;
 * author : 여인준
 * create date : 2021.04.03
 * update
-* 	2021.04.11 : 여인준 / 예약가능한 방 기본값 및 사용자 입력값에 따라 조회
+* 2021.04.11 : 여인준 / 예약가능한 방 기본값 및 사용자 입력값에 따라 조회
 * 
 **/
 
