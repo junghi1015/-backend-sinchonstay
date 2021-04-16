@@ -2,15 +2,19 @@ package com.project.sinchon.controller;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.project.sinchon.service.ApplyReservaionService;
 import com.project.sinchon.service.RoomService;
-
+import com.project.sinchon.vo.ApplyReservationVO;
 import com.project.sinchon.vo.reservationVO;
 import com.project.sinchon.vo.reviewVO;
 import com.project.sinchon.vo.roomVO;
+import com.project.sinchon.vo.sns_loginVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +31,8 @@ import java.util.List;
  * update 
  * 2021.04.11 : 여인준 / 예약가능한 방 기본값 및 사용자 입력값에 따라 조회 API 구현
  * 2021.04.12 : 여인준 / 예약신청 폼 이동시 날짜값 반환 API 구현 (DB작업 X)
+ * 2021.04.14 : 여인준 / 예약하기 API 구현(post 메소드, DB insert)
+ * 2021.04.17 : 여인준 / POST /reservation 예약신청 정보 DB저장 Controller 구현 완료 
  * */
 
 @RestController
@@ -35,6 +41,9 @@ public class GuestController {
     
     @Autowired // 확인사항 : Inject과 차이
     private RoomService roomService;
+    
+    @Autowired
+    private ApplyReservaionService applyReservationService;
     
 
     /**
@@ -69,7 +78,10 @@ public class GuestController {
 
 
     /**
-     * @description 예약신청 폼(form) 화면으로 이동(예약하기 페이지에서 선택한 check_in, check_out 값 넘겨주기)
+     * @description 예약신청 폼(form) 화면으로 이동
+     * <수정사항>
+     * 1. 예약하기 페이지에서 선택한 check_in, check_out 값 POST로 넘겨주기
+     * 2. 예약정보가 있다면 회원정보 데이터를 같이 보내주기 (User Table에 회원정보 입력여부 컬럼 추가)
      */
     @GetMapping(value = "/reservation", produces = {MediaType.APPLICATION_JSON_VALUE})
     public String reservationForm(@RequestParam("check_in") String checkIn,
@@ -80,10 +92,23 @@ public class GuestController {
     	// URL로 받은 check_in 과 check_out 값 JSON으로 다시 넘겨주기
     	dateObj.addProperty("check_in", checkIn);
     	dateObj.addProperty("check_out", checkOut);
-        
+   	
         // JSON객체를 String으로 반환 
     	return dateObj.toString();
     }
 
+    /**
+     * @throws Exception 
+     * @description 예약신청 폼(form) 작성해서 예약신청하기
+     * 프론트엔드와 통신시 RequestBody의 데이터 형태 확인
+     */
+    @PostMapping(value = "/reservation", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public void reservation(@RequestBody ApplyReservationVO applyReservationVO) throws Exception {
+    	// 사용자 입력 데이터가 JSON형태로 들어와서
+    	// @RequestBody를 거쳐서 VO객체의 변수들과 매핑됨
+    	// 매핑된 VO객체를 Service레이어의 인자값으로 넘겨줌
+    	applyReservationService.insertReservation(applyReservationVO);
+    }
+    
 
 }// End

@@ -26,7 +26,7 @@ public class RoomDAO {
 	
     @Autowired
     private SqlSession sqlSession;
-    private static final String namespace = "com.project.sinchon";
+    private static final String namespace = "com.project.sinchon.mapper.RoomMapper";
     
 	 /**
      * @description 예약가능한 방 리스트 출력 예약가능한 방 리스트 출력(기본값 : 접속일 기준 1박2일로 예약가능한 방 조회)

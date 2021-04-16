@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.project.sinchon">
+<mapper namespace="com.project.sinchon.mapper.RoomMapper">
 	<!-- 예약가능한 방 출력하기 : 기본값 시스템 시간 기준 1박2일 -->
 	<select id="getList" resultType="com.project.sinchon.vo.roomVO">
 		SELECT room_ID, room_type, room_img, bed, bathroom, capacity, price_day, price_month
@@ -21,4 +21,6 @@
 			 FROM reservation_room
 			 WHERE res_date BETWEEN #{checkIn} AND #{checkOut});
 	</select>
+
+
 </mapper>
