@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /*
  *
@@ -33,6 +34,7 @@ import java.util.List;
  * 2021.04.12 : 여인준 / 예약신청 폼 이동시 날짜값 반환 API 구현 (DB작업 X)
  * 2021.04.14 : 여인준 / 예약하기 API 구현(post 메소드, DB insert)
  * 2021.04.17 : 여인준 / POST /reservation 예약신청 정보 DB저장 Controller 구현 완료 
+ * 2021.04.17 : 여인준 / 예약신청 폼화면으로 이동 요청 메소드 변경 (GET에서 POST로)
  * */
 
 @RestController
@@ -79,22 +81,25 @@ public class GuestController {
 
     /**
      * @description 예약신청 폼(form) 화면으로 이동
-     * <수정사항>
+     *  <21.04.17 수정사항>
      * 1. 예약하기 페이지에서 선택한 check_in, check_out 값 POST로 넘겨주기
+     * 
+     *  <수정 예정사항>
      * 2. 예약정보가 있다면 회원정보 데이터를 같이 보내주기 (User Table에 회원정보 입력여부 컬럼 추가)
      */
-    @GetMapping(value = "/reservation", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public String reservationForm(@RequestParam("check_in") String checkIn,
-    							  @RequestParam("check_out") String checkOut) throws Exception{
-    	// Gson모듈내 JSON클래스의 객체 생성
-    	JsonObject dateObj = new JsonObject();
+    @PostMapping(value = "/reservation/form", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public String reservationForm(@RequestBody Map<String, Object> dateInOut ) throws Exception{
+    	// POST방식으로 받은 JSON 데이터 Map으로 받기 
+    	// Map으로 받은 데이터 JSON형태로 변환 : Gson모듈내 JSON클래스 활용
+    	JsonObject jsonObj = new JsonObject();
     	
-    	// URL로 받은 check_in 과 check_out 값 JSON으로 다시 넘겨주기
-    	dateObj.addProperty("check_in", checkIn);
-    	dateObj.addProperty("check_out", checkOut);
-   	
+    	// Map으로 받은 check_in값 과 check_out값 JSON으로 다시 넘겨주기
+    	jsonObj.addProperty("check_in", (String) dateInOut.get("check_in"));
+    	jsonObj.addProperty("check_out", (String) dateInOut.get("check_out"));
+    	
+    	// 회원 아이디로 회원저
         // JSON객체를 String으로 반환 
-    	return dateObj.toString();
+    	return jsonObj.toString();
     }
 
     /**
