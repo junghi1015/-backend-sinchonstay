@@ -35,6 +35,7 @@ import java.util.Map;
  * 2021.04.14 : 여인준 / 예약하기 API 구현(post 메소드, DB insert)
  * 2021.04.17 : 여인준 / POST /reservation 예약신청 정보 DB저장 Controller 구현 완료 
  * 2021.04.17 : 여인준 / 예약신청 폼화면으로 이동 요청 메소드 변경 (GET에서 POST로)
+ * 2021.04.18 : 여인준 / 호스트가 등록한 모든 방 조회(예약하기 페이지에서 기본적으로 제공하는 데이터)
  * */
 
 @RestController
@@ -47,13 +48,21 @@ public class GuestController {
     @Autowired
     private ApplyReservaionService applyReservationService;
     
-
     /**
-     * @description 예약 가능한 방 목록 조회 (접속일 기준 1박2일로 예약가능한 방 조회)
+     * @description 호스트가 등록한 모든 방 조회
      */
     @GetMapping(value = "/rooms", produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<roomVO> roomList() throws Exception{
         return roomService.getList();
+    }
+    
+    
+    /**
+     * @description 예약 가능한 방 목록 조회 (접속일 기준 1박2일로 예약가능한 방 조회)
+     */
+    @GetMapping(value = "/rooms/available", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<roomVO> roomAbleList() throws Exception{
+        return roomService.getAbleList();
     }
     
     

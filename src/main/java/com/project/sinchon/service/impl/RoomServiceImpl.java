@@ -19,6 +19,7 @@ import com.project.sinchon.vo.roomVO;
 * create date : 2021.04.03
 * update
 * 2021.04.11 : 여인준 / 예약가능한 방 기본값 및 사용자 입력값에 따라 조회
+* 2021.04.18 : 여인준 / 호스트가 등록한 모든 방 조회
 * 
 **/
 
@@ -27,12 +28,20 @@ public class RoomServiceImpl implements RoomService {
 	@Autowired
 	private RoomDAO roomDAO;
 	
+	 /**
+     * @description 호스트가 등록한 모든 방 조회
+     */
+	@Override
+	public List<roomVO> getList() throws Exception {
+		return roomDAO.getList();
+	}
+	
 	/**
      * @description 예약가능한 방 리스트 출력 (기본값 : 접속일 기준 1박2일로 예약가능한 방 조회)
      */	
 	@Override
-	public List<roomVO> getList() throws Exception {
-		return roomDAO.getList();
+	public List<roomVO> getAbleList() throws Exception {
+		return roomDAO.getAbleList();
 	}
 
 	 /**

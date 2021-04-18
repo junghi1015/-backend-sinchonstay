@@ -17,7 +17,8 @@ import com.project.sinchon.vo.roomVO;
 * title : DB에 접근하는 layer(room 테이블)
 * author : 여인준
 * create date : 2021.04.03
-* update : -
+* update 
+* 	2021.04.18 : 여인준 / 호스트가 등록한 모든 방 조회
 * 
 * */
 
@@ -29,10 +30,17 @@ public class RoomDAO {
     private static final String namespace = "com.project.sinchon.mapper.RoomMapper";
     
 	 /**
-     * @description 예약가능한 방 리스트 출력 예약가능한 방 리스트 출력(기본값 : 접속일 기준 1박2일로 예약가능한 방 조회)
+     * @description 호스트가 등록한 모든 방 조회
      */
 	public List<roomVO> getList() {
-        return sqlSession.selectList(namespace + ".getList");
+		return sqlSession.selectList(namespace + ".getList");
+	}
+    
+	 /**
+     * @description 예약가능한 방 리스트 출력 예약가능한 방 리스트 출력(기본값 : 접속일 기준 1박2일로 예약가능한 방 조회)
+     */
+	public List<roomVO> getAbleList() {
+        return sqlSession.selectList(namespace + ".getAbleList");
 	}
 
 	 /**
