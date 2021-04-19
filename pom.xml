@@ -84,6 +84,17 @@
 			<version>2.9.6</version>
 		</dependency>
 		 -->
+		 
+		<!-- JSP 사용을 위해 jstl추가 / 21.04.19 인준 --> 
+	    <dependency>
+	        <groupId>org.apache.tomcat.embed</groupId>
+	        <artifactId>tomcat-embed-jasper</artifactId>
+	    </dependency>
+	    <dependency>
+	        <groupId>jstl</groupId>
+	        <artifactId>jstl</artifactId>
+	        <version>1.2</version>
+	    </dependency> 
     </dependencies>
 
     <build>
