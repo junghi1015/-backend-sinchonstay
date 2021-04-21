@@ -14,7 +14,7 @@ import com.project.sinchon.vo.roomVO;
 
 /*
 *
-* title : DB에 접근하는 layer(room 테이블)
+* title : Room테이블 관련 DAO
 * author : 여인준
 * create date : 2021.04.03
 * update 

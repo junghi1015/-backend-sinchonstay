@@ -29,6 +29,7 @@ public class ApplyReservationVO {
 	private Date check_out;
 	private String stay_purpose;
 	private int num_of_guests;
+	private int payment;
 	private String message; // 기타
 
 }

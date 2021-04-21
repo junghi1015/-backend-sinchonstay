@@ -3,9 +3,10 @@ package com.project.sinchon.controller;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.project.sinchon.service.ApplyReservaionService;
+import com.project.sinchon.service.ReservationService;
 import com.project.sinchon.service.RoomService;
 import com.project.sinchon.vo.ApplyReservationVO;
-import com.project.sinchon.vo.reservationVO;
+import com.project.sinchon.vo.ReservationInfoVO;
 import com.project.sinchon.vo.reviewVO;
 import com.project.sinchon.vo.roomVO;
 import com.project.sinchon.vo.sns_loginVO;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,17 +51,19 @@ public class GuestController {
     @Autowired
     private ApplyReservaionService applyReservationService;
     
+    @Autowired
+    private ReservationService reservationService;
+    
     /**
-     * @description 호스트가 등록한 모든 방 조회
+     * @description [예약페이지] 모든 방 조회
      */
     @GetMapping(value = "/rooms", produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<roomVO> roomList() throws Exception{
         return roomService.getList();
     }
     
-    
     /**
-     * @description 예약 가능한 방 목록 조회 (접속일 기준 1박2일로 예약가능한 방 조회)
+     * @description [예약페이지] 예약가능한 방 기본값 조회(기본값 : 현재일 기준 1박 2일 예약가능한 방)
      */
     @GetMapping(value = "/rooms/available", produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<roomVO> roomAbleList() throws Exception{
@@ -68,7 +72,7 @@ public class GuestController {
     
     
     /**
-     * @description 예약 가능한 방 목록 조회 (사용자 입력값에 따라 출력)
+     * @description [예약페이지] 예약가능한 방 검색(파라미터 : check in 날짜, check out 날짜) 
      */
     @GetMapping(value = "/rooms/search", produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<roomVO> roomSearchList(@RequestParam("check_in") String checkIn,
@@ -90,10 +94,9 @@ public class GuestController {
 
 
     /**
-     * @description 예약신청 폼(form) 화면으로 이동
+     * @description [예약페이지] 예약신청 폼(form) 화면으로 이동 
      *  <21.04.17 수정사항>
      * 1. 예약하기 페이지에서 선택한 check_in, check_out 값 POST로 넘겨주기
-     * 
      *  <수정 예정사항>
      * 2. 예약정보가 있다면 회원정보 데이터를 같이 보내주기 (User Table에 회원정보 입력여부 컬럼 추가)
      */
@@ -113,8 +116,7 @@ public class GuestController {
     }
 
     /**
-     * @throws Exception 
-     * @description 예약신청 폼(form) 작성해서 예약신청하기
+     * @description [예약페이지] 예약신청하기 
      * 프론트엔드와 통신시 RequestBody의 데이터 형태 확인
      */
     @PostMapping(value = "/reservation", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
@@ -125,5 +127,38 @@ public class GuestController {
     	applyReservationService.insertReservation(applyReservationVO);
     }
 
+    /**
+     * @throws Exception 
+     * @description [마이페이지] 본인 예약 이력 및 현황 확인하기
+     * 2021.04.21 ver. user_ID를 url로 받아오기 (로그인 구현후 수정 예정)     
+     */
+    @GetMapping(value = "/reservations", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public String reservations(@RequestParam("user_id") String userID) throws Exception {
+    	// user_ID는 url 쿼리스트링으로 받아와서
+    	// map자료구조에 user_ID값을 담고
+    	// map을 인자로 넣어줘 Service 레이어 호출
+    	HashMap<String, String> map = new HashMap<String, String>();
+    	map.put("user_ID", userID);
+    	List<ReservationInfoVO> mypageList = reservationService.getMypageList(map);
 
+    	// Gson객체 생성 : 반환받은 VO객체를 JSON으로 변환(NULL값 제거 목적)
+    	Gson gson = new Gson();
+    	
+    	// ArrayList객체 생성 : JSON으로 변환된 VO객체를 담을 용도
+    	List<String> jsonMypageList = new ArrayList<>();
+    	
+    	// Gson객체와 반복문을 통해 VO객체 JSON변환 후 새로운 JSON List에 담기
+    	for (int i=0; i < mypageList.size(); i++) {
+    		String temp = gson.toJson(mypageList.get(i));
+    		jsonMypageList.add(temp);
+    	}
+    	// 출력 데이터 비교... 프론트랑 협의 후 하나로 통일
+    	System.out.println("VO객체 : " + mypageList); // 
+    	System.out.println("List<JSON> : " + jsonMypageList);
+    	System.out.println("gson으로 만든 JSON" + gson.toJson(jsonMypageList));
+    	
+    	
+//    	return jsonMypageList;
+    	return gson.toJson(jsonMypageList);
+    }
 }// End

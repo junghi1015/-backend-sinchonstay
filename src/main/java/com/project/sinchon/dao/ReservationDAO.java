@@ -1,12 +1,14 @@
 package com.project.sinchon.dao;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.sinchon.vo.ApplyReservationVO;
+import com.project.sinchon.vo.ReservationInfoVO;
 
 /*
 *
@@ -33,6 +35,11 @@ public class ReservationDAO {
 	public void insertRoomAndState(HashMap<String, Object> map) {
 		sqlSession.insert(namespace + ".insertRoomAndState", map);
 		
+	}
+
+	// 게스트의 예약 현황 및 상태 정보 가져오기
+	public List<ReservationInfoVO> getMypageList(HashMap<String, String> map) {
+		return sqlSession.selectList(namespace + ".getMypageList", map);
 	}
 
 }

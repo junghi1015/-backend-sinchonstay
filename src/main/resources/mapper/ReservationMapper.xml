@@ -7,7 +7,7 @@
 		<!-- res_ID로 PK값 생성후 해당값을 INSERT구문에 넣어줌. -->
 		<selectKey resultType="int" keyProperty="res_ID" order="BEFORE">
         	SELECT IFNULL(max(res_ID),0)+1 as res_ID
-			 FROM reservation_info
+			FROM reservation_info
     	</selectKey>
 
 		INSERT INTO reservation_info(
@@ -16,7 +16,8 @@
 			check_out, 
 			stay_purpose, 
 			num_of_guests, 
-			message, 
+			payment,
+			message,
 			user_ID, 
 			room_ID)
 		VALUES (
@@ -25,6 +26,7 @@
 			#{check_out}, 
 			#{stay_purpose}, 
 			#{num_of_guests}, 
+			#{payment},
 			#{message}, 
 			#{user_ID}, 
 			#{room_ID})
@@ -38,5 +40,12 @@
 			#{user_ID})
 		}
 	</insert>
+	
+	<!-- 게스트의 예약 현황 및 상태 정보 가져오기 -->
+	<select id="getMypageList" resultType="com.project.sinchon.vo.ReservationInfoVO">
+		SELECT Info.res_ID, Info.res_date, Info.check_in, Info.check_out, Info.stay_purpose, Info.num_of_guests, Info.message, Info.payment, Info.room_ID, State.state
+		FROM reservation_info Info INNER JOIN reservation_state State ON Info.res_ID = State.res_ID
+		WHERE Info.user_ID = #{user_ID}; 
+	</select>
 	
 </mapper>
