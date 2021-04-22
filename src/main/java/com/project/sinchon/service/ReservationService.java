@@ -3,6 +3,7 @@ package com.project.sinchon.service;
 import java.util.HashMap;
 import java.util.List;
 
+import com.project.sinchon.vo.ReservationCancelVO;
 import com.project.sinchon.vo.ReservationInfoVO;
 
 
@@ -17,8 +18,30 @@ import com.project.sinchon.vo.ReservationInfoVO;
 
 public interface ReservationService {
 	 /**
-     * @param map 
+     * @param
+     * @return List<ReservationInfoVO
 	 * @description 사용자가 예약한 예약현황 및 상태 정보 가져오기 
      */
 	List<ReservationInfoVO> getMypageList(HashMap<String, String> map) throws Exception;
+
+	 /**
+     * @param 
+     * @return ReservationInfoVO
+	 * @description 수정할 예약정보 가져오기 
+     */
+	ReservationInfoVO getReservationForUpdate(int res_ID) throws Exception;
+
+	 /**
+     * @param
+	 * @return int
+	 * @description 입력받은 예약정보로 수정오기 
+     */
+	int updateReservation(ReservationInfoVO reservationInfoVO);
+
+	 /**
+     * @param
+	 * @return int
+	 * @description 예약 취소하기 
+     */
+	int cancelReservation(ReservationCancelVO reservationCancelVO);
 }

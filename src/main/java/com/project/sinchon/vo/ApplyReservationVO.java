@@ -2,7 +2,7 @@ package com.project.sinchon.vo;
 
 import lombok.Data;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  * title : 게스트가 예약신청한 데이터를 받는 VO

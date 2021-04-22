@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.sinchon.vo.ApplyReservationVO;
+import com.project.sinchon.vo.ReservationCancelVO;
 import com.project.sinchon.vo.ReservationInfoVO;
 
 /*
@@ -40,6 +41,27 @@ public class ReservationDAO {
 	// 게스트의 예약 현황 및 상태 정보 가져오기
 	public List<ReservationInfoVO> getMypageList(HashMap<String, String> map) {
 		return sqlSession.selectList(namespace + ".getMypageList", map);
+	}
+
+	// 수정할 예약 정보 가져오기
+	public ReservationInfoVO getReservationForUpdate(int res_ID) {
+		return sqlSession.selectOne(namespace + ".getReservationForUpdate", res_ID);
+	}
+
+	// 입력한 예약정보 수정하기
+	public int updateReservation(ReservationInfoVO reservationInfoVO) {
+		return sqlSession.update(namespace + ".updateReservation", reservationInfoVO);
+	}
+	
+	// 예약취소 테이블에 취소된 예약ID 삽입하기
+	public int insertCancelReservation(ReservationCancelVO reservationCancelVO) {
+		return sqlSession.insert(namespace + ".insertCancelReservation", reservationCancelVO);
+	}
+	
+	// 취소된 예약의 예약상태 변경
+	public int updateStateToCancel(ReservationCancelVO reservationCancelVO) {
+		return sqlSession.update(namespace + ".updateStateToCancel", reservationCancelVO);
+		
 	}
 
 }

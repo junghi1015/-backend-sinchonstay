@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.sinchon.dao.ReservationDAO;
 import com.project.sinchon.service.ReservationService;
+import com.project.sinchon.vo.ReservationCancelVO;
 import com.project.sinchon.vo.ReservationInfoVO;
 
 /*
@@ -29,4 +30,25 @@ public class ReservationServiceImpl implements ReservationService {
 		return reservationDAO.getMypageList(map);
 	}
 	
+	@Override
+	public ReservationInfoVO getReservationForUpdate(int res_ID) throws Exception {
+		return reservationDAO.getReservationForUpdate(res_ID);
+	}
+
+	@Override
+	public int updateReservation(ReservationInfoVO reservationInfoVO) {
+		return reservationDAO.updateReservation(reservationInfoVO);
+	}
+
+	@Override
+	public int cancelReservation(ReservationCancelVO reservationCancelVO) {
+		//예약취소 테이블에 취소된 예약 입력하기
+		int isOKInsert = reservationDAO.insertCancelReservation(reservationCancelVO);
+		
+		//예약상태 테이블 상태정보 변경 : 3 (예약취소상태)
+		int isOKUpdate = reservationDAO.updateStateToCancel(reservationCancelVO);
+		
+		if (isOKInsert == 1 && isOKUpdate == 1) {return 1;}
+		else {return 0;}
+	}
 }

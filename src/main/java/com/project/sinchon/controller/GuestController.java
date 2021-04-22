@@ -1,11 +1,13 @@
 package com.project.sinchon.controller;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.project.sinchon.service.ApplyReservaionService;
 import com.project.sinchon.service.ReservationService;
 import com.project.sinchon.service.RoomService;
 import com.project.sinchon.vo.ApplyReservationVO;
+import com.project.sinchon.vo.ReservationCancelVO;
 import com.project.sinchon.vo.ReservationInfoVO;
 import com.project.sinchon.vo.reviewVO;
 import com.project.sinchon.vo.roomVO;
@@ -14,7 +16,9 @@ import com.project.sinchon.vo.sns_loginVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -70,7 +74,6 @@ public class GuestController {
         return roomService.getAbleList();
     }
     
-    
     /**
      * @description [예약페이지] 예약가능한 방 검색(파라미터 : check in 날짜, check out 날짜) 
      */
@@ -118,9 +121,11 @@ public class GuestController {
     /**
      * @description [예약페이지] 예약신청하기 
      * 프론트엔드와 통신시 RequestBody의 데이터 형태 확인
+     * <추가 수정 요구사항>
+     * 21.04.22 인준 : 비회원에 대한 접근을 막고, 로그인한 user_ID 정보를 사용해야 함.
      */
     @PostMapping(value = "/reservation", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public void reservation(@RequestBody ApplyReservationVO applyReservationVO) throws Exception {
+    public void applyReservation(@RequestBody ApplyReservationVO applyReservationVO) throws Exception {
     	// 사용자 입력 데이터가 JSON형태로 들어와서
     	// @RequestBody를 거쳐서 VO객체의 변수들과 매핑됨
     	// 매핑된 VO객체를 Service레이어의 인자값으로 넘겨줌
@@ -133,7 +138,7 @@ public class GuestController {
      * 2021.04.21 ver. user_ID를 url로 받아오기 (로그인 구현후 수정 예정)     
      */
     @GetMapping(value = "/reservations", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public String reservations(@RequestParam("user_id") String userID) throws Exception {
+    public JsonArray getReservations(@RequestParam("user_id") String userID) throws Exception {
     	// user_ID는 url 쿼리스트링으로 받아와서
     	// map자료구조에 user_ID값을 담고
     	// map을 인자로 넣어줘 Service 레이어 호출
@@ -146,19 +151,66 @@ public class GuestController {
     	
     	// ArrayList객체 생성 : JSON으로 변환된 VO객체를 담을 용도
     	List<String> jsonMypageList = new ArrayList<>();
+    	JsonArray jsonArray = new JsonArray();
+    	JsonObject obj = new JsonObject();
+    	
+    	
     	
     	// Gson객체와 반복문을 통해 VO객체 JSON변환 후 새로운 JSON List에 담기
     	for (int i=0; i < mypageList.size(); i++) {
     		String temp = gson.toJson(mypageList.get(i));
-    		jsonMypageList.add(temp);
+    		System.out.println("temp출력 : " + temp);
+    		jsonArray.add(temp);
     	}
+    	obj.add("reservations", jsonArray);
+    	
     	// 출력 데이터 비교... 프론트랑 협의 후 하나로 통일
+    	
     	System.out.println("VO객체 : " + mypageList); // 
     	System.out.println("List<JSON> : " + jsonMypageList);
-    	System.out.println("gson으로 만든 JSON" + gson.toJson(jsonMypageList));
+    	System.out.println("gson으로 만든 JSON" + gson.toJson(jsonArray));
+    	System.out.println("JSON으로 감싼 : " + obj);
+    	System.out.println("JSON으로 감싼22 : " + obj.toString());
     	
+//    	return mypageList;
+    	return jsonArray;
+//    	return gson.toJson(jsonMypageList);
+    }
+    
+    /**
+     * @description [마이페이지] 예약수정하기 (수정할 예약정보 가져오기) 
+     * <추가 수정 요구사항>
+     * 21.04.22 인준 : 권한관리 (비회원에 대한 접근을 막고, 로그인한 user_ID 정보를 사용해야 함.) / 반환되는 JSON객체의 null값 제거하기!
+     */
+    @GetMapping(value = "/reservation/{res_ID}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ReservationInfoVO getReservationForUpdate(@PathVariable("res_ID") int res_ID) throws Exception {
+    	// 수정예정사항 : 권한관리 필요.. 반환되는 JSON객체 NULL값 제거...
+    	return reservationService.getReservationForUpdate(res_ID);
+    }
+    
+    /**
+     * @description [마이페이지] 예약수정하기 (사용자가 입력한 예약정보로 수정하기) 
+     * <추가 수정 요구사항>
+     * 21.04.22 인준 : 권한관리 (비회원에 대한 접근을 막고, 로그인한 user_ID 정보를 사용해야 함.) / 수정데이터를 받을 객체 수정(수정항목만 받을 객체로 생성)
+     */
+    @PutMapping(value = "/reservation", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public String updateReservation(@RequestBody ReservationInfoVO reservataionInfoVO) throws Exception {
+    	int isSuccess = reservationService.updateReservation(reservataionInfoVO);
     	
-//    	return jsonMypageList;
-    	return gson.toJson(jsonMypageList);
+    	if (isSuccess == 1) {return "수정완료입니다!";} 
+    	else {return "수정이 안됐습니다.. ㅠ 재시도해주세요";}
+    }
+    
+    /**
+     * @description [마이페이지] 예약취소하기  
+     * <추가 수정 요구사항>
+     * 21.04.22 인준 : 권한관리 (비회원에 대한 접근을 막고, 로그인한 user_ID 정보를 사용해야 함.) / 수정데이터를 받을 객체 수정(수정항목만 받을 객체로 생성) / DAO호출 2개하는 것을 프로시저로 작성!
+     */
+    @PutMapping(value = "/reservation/cancel", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public String cancelReservation(@RequestBody ReservationCancelVO reservationCancelVO) throws Exception {
+    	int isSuccess = reservationService.cancelReservation(reservationCancelVO);
+    	return "성공!";
+//    	if (isSuccess == 1) {return "정상적으로 예약이 취소됐습니다!";} 
+//    	else {return "취소가 안됐습니다.. ㅠ 재시도해주세요";}
     }
 }// End
