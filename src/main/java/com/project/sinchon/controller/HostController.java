@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping(value="/test/*")
-public class JSPController {
+public class HostController {
 	
 	@RequestMapping(value="/getjsp")
 	public String getJSP() {

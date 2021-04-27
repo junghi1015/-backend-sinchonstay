@@ -1,11 +1,11 @@
-package com.project.sinchon.vo;
+package com.project.sinchon.dto;
 
 import lombok.Data;
 
 import java.util.Date;
 
 /**
- * title : 예약정보 테이블 VO
+ * title : 예약정보 테이블 DTO
  * author : 정효인
  * create_date : 2021.03.24
  * update 
@@ -13,7 +13,7 @@ import java.util.Date;
  *
  * */
 @Data
-public class ReservationInfoVO {
+public class ReservationInfoDTO {
     private int res_ID;
     private Date res_date;
     private Date check_in;
@@ -24,10 +24,12 @@ public class ReservationInfoVO {
     private int payment;
     private String user_ID;
     private int room_ID;
-    private int state; // (임시) 예약상태 테이블의 state속성 값 받아주는 변수
+    
+    // 예약상태 테이블의 state속성값 받아주는 필드
+    private int state; 
     
     // join 데이터 받아올 객체 속성 추가
-    private userVO userVO;
-    private ReservationStateVO resStateVO;
+    private UserDTO userDTO;
+    private ReservationStateDTO reservationStateDTO;
     
 }

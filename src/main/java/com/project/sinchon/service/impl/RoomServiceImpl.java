@@ -8,9 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.sinchon.dao.RoomDAO;
+import com.project.sinchon.dto.RoomDTO;
 import com.project.sinchon.service.RoomService;
-
-import com.project.sinchon.vo.roomVO;
 
 /**
 *
@@ -32,7 +31,7 @@ public class RoomServiceImpl implements RoomService {
      * @description 호스트가 등록한 모든 방 조회
      */
 	@Override
-	public List<roomVO> getList() throws Exception {
+	public List<RoomDTO> getList() throws Exception {
 		return roomDAO.getList();
 	}
 	
@@ -40,7 +39,7 @@ public class RoomServiceImpl implements RoomService {
      * @description 예약가능한 방 리스트 출력 (기본값 : 접속일 기준 1박2일로 예약가능한 방 조회)
      */	
 	@Override
-	public List<roomVO> getAbleList() throws Exception {
+	public List<RoomDTO> getAbleList() throws Exception {
 		return roomDAO.getAbleList();
 	}
 
@@ -48,7 +47,7 @@ public class RoomServiceImpl implements RoomService {
      * @description 예약가능한 방 리스트 출력 (사용자 입력값에 따라 출력)
      */	
 	@Override
-	public List<roomVO> getSearchList(HashMap<String, Date> dateMap) {
+	public List<RoomDTO> getSearchList(HashMap<String, Date> dateMap) {
 		return roomDAO.getSearchList(dateMap);
 	}
 }

@@ -7,9 +7,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.project.sinchon.vo.ApplyReservationVO;
-import com.project.sinchon.vo.ReservationCancelVO;
-import com.project.sinchon.vo.ReservationInfoVO;
+import com.project.sinchon.dto.ApplyReservationDTO;
+import com.project.sinchon.dto.ReservationCancelDTO;
+import com.project.sinchon.dto.ReservationInfoDTO;
 
 /*
 *
@@ -28,8 +28,8 @@ public class ReservationDAO {
     private static final String namespace = "com.project.sinchon.mapper.reservation";
 	
 	// 예약정보 테이블 insert
-	public int insertInfo(ApplyReservationVO applyReservationVO) {
-		return sqlSession.insert(namespace + ".insertInfo", applyReservationVO);
+	public int insertInfo(ApplyReservationDTO applyReservationDTO) {
+		return sqlSession.insert(namespace + ".insertInfo", applyReservationDTO);
 	}
 
 	// 예약된 방 테이블, 예약상태 테이블 insert >> insert_room_and_state 프로시저 호출
@@ -39,28 +39,28 @@ public class ReservationDAO {
 	}
 
 	// 게스트의 예약 현황 및 상태 정보 가져오기
-	public List<ReservationInfoVO> getMypageList(HashMap<String, String> map) {
+	public List<ReservationInfoDTO> getMypageList(HashMap<String, String> map) {
 		return sqlSession.selectList(namespace + ".getMypageList", map);
 	}
 
 	// 수정할 예약 정보 가져오기
-	public ReservationInfoVO getReservationForUpdate(int res_ID) {
+	public ReservationInfoDTO getReservationForUpdate(int res_ID) {
 		return sqlSession.selectOne(namespace + ".getReservationForUpdate", res_ID);
 	}
 
 	// 입력한 예약정보 수정하기
-	public int updateReservation(ReservationInfoVO reservationInfoVO) {
-		return sqlSession.update(namespace + ".updateReservation", reservationInfoVO);
+	public int updateReservation(ReservationInfoDTO reservationInfoDTO) {
+		return sqlSession.update(namespace + ".updateReservation", reservationInfoDTO);
 	}
 	
 	// 예약취소 테이블에 취소된 예약ID 삽입하기
-	public int insertCancelReservation(ReservationCancelVO reservationCancelVO) {
-		return sqlSession.insert(namespace + ".insertCancelReservation", reservationCancelVO);
+	public int insertCancelReservation(ReservationCancelDTO reservationCancelDTO) {
+		return sqlSession.insert(namespace + ".insertCancelReservation", reservationCancelDTO);
 	}
 	
 	// 취소된 예약의 예약상태 변경
-	public int updateStateToCancel(ReservationCancelVO reservationCancelVO) {
-		return sqlSession.update(namespace + ".updateStateToCancel", reservationCancelVO);
+	public int updateStateToCancel(ReservationCancelDTO reservationCancelDTO) {
+		return sqlSession.update(namespace + ".updateStateToCancel", reservationCancelDTO);
 		
 	}
 

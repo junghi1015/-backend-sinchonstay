@@ -3,15 +3,15 @@ package com.project.sinchon.controller;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.project.sinchon.dto.ApplyReservationDTO;
+import com.project.sinchon.dto.ReservationCancelDTO;
+import com.project.sinchon.dto.ReservationInfoDTO;
+import com.project.sinchon.dto.ReviewDTO;
+import com.project.sinchon.dto.RoomDTO;
+import com.project.sinchon.dto.SNSInfoDTO;
 import com.project.sinchon.service.ApplyReservaionService;
 import com.project.sinchon.service.ReservationService;
 import com.project.sinchon.service.RoomService;
-import com.project.sinchon.vo.ApplyReservationVO;
-import com.project.sinchon.vo.ReservationCancelVO;
-import com.project.sinchon.vo.ReservationInfoVO;
-import com.project.sinchon.vo.reviewVO;
-import com.project.sinchon.vo.roomVO;
-import com.project.sinchon.vo.sns_loginVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 /*
  *
@@ -62,7 +63,7 @@ public class GuestController {
      * @description [예약페이지] 모든 방 조회
      */
     @GetMapping(value = "/rooms", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<roomVO> roomList() throws Exception{
+    public List<RoomDTO> roomList() throws Exception{
         return roomService.getList();
     }
     
@@ -70,7 +71,7 @@ public class GuestController {
      * @description [예약페이지] 예약가능한 방 기본값 조회(기본값 : 현재일 기준 1박 2일 예약가능한 방)
      */
     @GetMapping(value = "/rooms/available", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<roomVO> roomAbleList() throws Exception{
+    public List<RoomDTO> roomAbleList() throws Exception{
         return roomService.getAbleList();
     }
     
@@ -78,7 +79,7 @@ public class GuestController {
      * @description [예약페이지] 예약가능한 방 검색(파라미터 : check in 날짜, check out 날짜) 
      */
     @GetMapping(value = "/rooms/search", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<roomVO> roomSearchList(@RequestParam("check_in") String checkIn,
+    public List<RoomDTO> roomSearchList(@RequestParam("check_in") String checkIn,
     									@RequestParam("check_out") String checkOut) throws Exception{
     	// 사용자가 입력한 날짜를 담을 map객체 생성
     	HashMap<String, Date> dateMap = new HashMap<String, Date>();
@@ -104,7 +105,7 @@ public class GuestController {
      * 2. 예약정보가 있다면 회원정보 데이터를 같이 보내주기 (User Table에 회원정보 입력여부 컬럼 추가)
      */
     @PostMapping(value = "/reservation/form", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public String reservationForm(@RequestBody Map<String, Object> dateInOut ) throws Exception{
+    public JsonObject reservationForm(@RequestBody Map<String, Object> dateInOut ) throws Exception{
     	// POST방식으로 받은 JSON 데이터 Map으로 받기 
     	// Map으로 받은 데이터 JSON형태로 변환 : Gson모듈내 JSON클래스 활용
     	JsonObject jsonObj = new JsonObject();
@@ -115,7 +116,7 @@ public class GuestController {
     	
     	// 회원 아이디로 회원저
         // JSON객체를 String으로 반환 
-    	return jsonObj.toString();
+    	return jsonObj;
     }
 
     /**
@@ -125,11 +126,11 @@ public class GuestController {
      * 21.04.22 인준 : 비회원에 대한 접근을 막고, 로그인한 user_ID 정보를 사용해야 함.
      */
     @PostMapping(value = "/reservation", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public void applyReservation(@RequestBody ApplyReservationVO applyReservationVO) throws Exception {
+    public void applyReservation(@RequestBody ApplyReservationDTO applyReservationDTO) throws Exception {
     	// 사용자 입력 데이터가 JSON형태로 들어와서
     	// @RequestBody를 거쳐서 VO객체의 변수들과 매핑됨
     	// 매핑된 VO객체를 Service레이어의 인자값으로 넘겨줌
-    	applyReservationService.insertReservation(applyReservationVO);
+    	applyReservationService.insertReservation(applyReservationDTO);
     }
 
     /**
@@ -138,43 +139,15 @@ public class GuestController {
      * 2021.04.21 ver. user_ID를 url로 받아오기 (로그인 구현후 수정 예정)     
      */
     @GetMapping(value = "/reservations", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public JsonArray getReservations(@RequestParam("user_id") String userID) throws Exception {
+    public List<ReservationInfoDTO> getReservations(@RequestParam("user_id") String userID) throws Exception {
     	// user_ID는 url 쿼리스트링으로 받아와서
     	// map자료구조에 user_ID값을 담고
     	// map을 인자로 넣어줘 Service 레이어 호출
     	HashMap<String, String> map = new HashMap<String, String>();
     	map.put("user_ID", userID);
-    	List<ReservationInfoVO> mypageList = reservationService.getMypageList(map);
-
-    	// Gson객체 생성 : 반환받은 VO객체를 JSON으로 변환(NULL값 제거 목적)
-    	Gson gson = new Gson();
-    	
-    	// ArrayList객체 생성 : JSON으로 변환된 VO객체를 담을 용도
-    	List<String> jsonMypageList = new ArrayList<>();
-    	JsonArray jsonArray = new JsonArray();
-    	JsonObject obj = new JsonObject();
-    	
-    	
-    	
-    	// Gson객체와 반복문을 통해 VO객체 JSON변환 후 새로운 JSON List에 담기
-    	for (int i=0; i < mypageList.size(); i++) {
-    		String temp = gson.toJson(mypageList.get(i));
-    		System.out.println("temp출력 : " + temp);
-    		jsonArray.add(temp);
-    	}
-    	obj.add("reservations", jsonArray);
-    	
-    	// 출력 데이터 비교... 프론트랑 협의 후 하나로 통일
-    	
-    	System.out.println("VO객체 : " + mypageList); // 
-    	System.out.println("List<JSON> : " + jsonMypageList);
-    	System.out.println("gson으로 만든 JSON" + gson.toJson(jsonArray));
-    	System.out.println("JSON으로 감싼 : " + obj);
-    	System.out.println("JSON으로 감싼22 : " + obj.toString());
-    	
-//    	return mypageList;
-    	return jsonArray;
-//    	return gson.toJson(jsonMypageList);
+    	List<ReservationInfoDTO> mypageList = reservationService.getMypageList(map);
+    	System.out.println(mypageList.size());
+    	return mypageList;
     }
     
     /**
@@ -183,7 +156,7 @@ public class GuestController {
      * 21.04.22 인준 : 권한관리 (비회원에 대한 접근을 막고, 로그인한 user_ID 정보를 사용해야 함.) / 반환되는 JSON객체의 null값 제거하기!
      */
     @GetMapping(value = "/reservation/{res_ID}", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ReservationInfoVO getReservationForUpdate(@PathVariable("res_ID") int res_ID) throws Exception {
+    public ReservationInfoDTO getReservationForUpdate(@PathVariable("res_ID") int res_ID) throws Exception {
     	// 수정예정사항 : 권한관리 필요.. 반환되는 JSON객체 NULL값 제거...
     	return reservationService.getReservationForUpdate(res_ID);
     }
@@ -194,7 +167,7 @@ public class GuestController {
      * 21.04.22 인준 : 권한관리 (비회원에 대한 접근을 막고, 로그인한 user_ID 정보를 사용해야 함.) / 수정데이터를 받을 객체 수정(수정항목만 받을 객체로 생성)
      */
     @PutMapping(value = "/reservation", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public String updateReservation(@RequestBody ReservationInfoVO reservataionInfoVO) throws Exception {
+    public String updateReservation(@RequestBody ReservationInfoDTO reservataionInfoVO) throws Exception {
     	int isSuccess = reservationService.updateReservation(reservataionInfoVO);
     	
     	if (isSuccess == 1) {return "수정완료입니다!";} 
@@ -207,7 +180,7 @@ public class GuestController {
      * 21.04.22 인준 : 권한관리 (비회원에 대한 접근을 막고, 로그인한 user_ID 정보를 사용해야 함.) / 수정데이터를 받을 객체 수정(수정항목만 받을 객체로 생성) / DAO호출 2개하는 것을 프로시저로 작성!
      */
     @PutMapping(value = "/reservation/cancel", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public String cancelReservation(@RequestBody ReservationCancelVO reservationCancelVO) throws Exception {
+    public String cancelReservation(@RequestBody ReservationCancelDTO reservationCancelVO) throws Exception {
     	int isSuccess = reservationService.cancelReservation(reservationCancelVO);
     	return "성공!";
 //    	if (isSuccess == 1) {return "정상적으로 예약이 취소됐습니다!";} 

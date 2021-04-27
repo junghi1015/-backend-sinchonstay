@@ -4,7 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.project.sinchon.vo.ApplyReservationVO;
+import com.project.sinchon.dto.ApplyReservationDTO;
 
 /*
 *
@@ -22,8 +22,8 @@ public class UserDAO {
     private SqlSession sqlSession;
     private static final String namespace = "com.project.sinchon";
     
-	public void updateUserDetails(ApplyReservationVO applyReservationVO) {
-		sqlSession.update(namespace + ".updateUserDetails", applyReservationVO);
+	public void updateUserDetails(ApplyReservationDTO applyReservationDTO) {
+		sqlSession.update(namespace + ".updateUserDetails", applyReservationDTO);
 		
 	}
 

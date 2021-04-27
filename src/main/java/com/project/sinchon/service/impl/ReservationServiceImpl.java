@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.sinchon.dao.ReservationDAO;
+import com.project.sinchon.dto.ReservationCancelDTO;
+import com.project.sinchon.dto.ReservationInfoDTO;
 import com.project.sinchon.service.ReservationService;
-import com.project.sinchon.vo.ReservationCancelVO;
-import com.project.sinchon.vo.ReservationInfoVO;
 
 /*
 *
@@ -26,22 +26,22 @@ public class ReservationServiceImpl implements ReservationService {
 	private ReservationDAO reservationDAO;
 
 	@Override
-	public List<ReservationInfoVO> getMypageList(HashMap<String, String> map) throws Exception {
+	public List<ReservationInfoDTO> getMypageList(HashMap<String, String> map) throws Exception {
 		return reservationDAO.getMypageList(map);
 	}
 	
 	@Override
-	public ReservationInfoVO getReservationForUpdate(int res_ID) throws Exception {
+	public ReservationInfoDTO getReservationForUpdate(int res_ID) throws Exception {
 		return reservationDAO.getReservationForUpdate(res_ID);
 	}
 
 	@Override
-	public int updateReservation(ReservationInfoVO reservationInfoVO) {
+	public int updateReservation(ReservationInfoDTO reservationInfoVO) {
 		return reservationDAO.updateReservation(reservationInfoVO);
 	}
 
 	@Override
-	public int cancelReservation(ReservationCancelVO reservationCancelVO) {
+	public int cancelReservation(ReservationCancelDTO reservationCancelVO) {
 		//예약취소 테이블에 취소된 예약 입력하기
 		int isOKInsert = reservationDAO.insertCancelReservation(reservationCancelVO);
 		

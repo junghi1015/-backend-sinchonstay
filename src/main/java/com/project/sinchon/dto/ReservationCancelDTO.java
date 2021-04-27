@@ -1,12 +1,12 @@
-package com.project.sinchon.vo;
+package com.project.sinchon.dto;
 
 import java.util.Date;
 
 import lombok.Data;
 
 @Data
-public class ReservationCancelVO {
+public class ReservationCancelDTO {
 	private int res_ID;
 	private String content;
-
+	private Date cancel_date;
 }

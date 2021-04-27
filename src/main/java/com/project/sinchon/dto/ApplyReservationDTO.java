@@ -1,4 +1,4 @@
-package com.project.sinchon.vo;
+package com.project.sinchon.dto;
 
 import lombok.Data;
 
@@ -12,7 +12,7 @@ import java.util.Date;
  * */
 
 @Data
-public class ApplyReservationVO {
+public class ApplyReservationDTO {
 	// User테이블 컬럼과 Mapping
 	private String user_ID;
 	private String firstname;

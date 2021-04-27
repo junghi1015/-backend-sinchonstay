@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.project.sinchon.dao.ReservationDAO;
 import com.project.sinchon.dao.UserDAO;
+import com.project.sinchon.dto.ApplyReservationDTO;
+import com.project.sinchon.dto.RoomDTO;
 import com.project.sinchon.service.ApplyReservaionService;
-import com.project.sinchon.vo.ApplyReservationVO;
-import com.project.sinchon.vo.roomVO;
 
 /*
 *
@@ -33,18 +33,19 @@ public class ApplyReservationServiceImpl implements ApplyReservaionService {
 	private UserDAO userDAO;
 	
 	@Override
-	public void insertReservation(ApplyReservationVO applyReservationVO) throws Exception {
+	// <수정요청사항> : 트랜잭션 처리(중간에 오류뜨면 실행했던 SQL RollBack 시키기!
+	public void insertReservation(ApplyReservationDTO applyReservationDTO) throws Exception {
 		
 		// 예약 정보 테이블 : 예약정보 Insert
-		reservationDAO.insertInfo(applyReservationVO);
+		reservationDAO.insertInfo(applyReservationDTO);
 		
 		// 예약정보 Insert후 입력된 res_ID값 받기
-		int res_ID = applyReservationVO.getRes_ID();
+		int res_ID = applyReservationDTO.getRes_ID();
 		
 		// 추가 데이터를 넣어주기 위해 필요한 인자값 생성
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("res_ID", res_ID);
-		map.put("user_ID", applyReservationVO.getUser_ID());
+		map.put("user_ID", applyReservationDTO.getUser_ID());
 
 		// 예약된 방 테이블, 예약 상태 테이블에 데이터 Insert
 		reservationDAO.insertRoomAndState(map);

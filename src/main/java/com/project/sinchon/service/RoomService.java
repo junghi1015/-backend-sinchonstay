@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import com.project.sinchon.vo.roomVO;
+import com.project.sinchon.dto.RoomDTO;
 
 /*
 *
@@ -21,18 +21,18 @@ public interface RoomService {
 	 /**
      * @description 호스트가 등록한 모든 방 조회
      */
-	List<roomVO> getList() throws Exception;
+	List<RoomDTO> getList() throws Exception;
 	 
 	/**
      * @description 예약가능한 방 리스트 출력 (기본값 : 접속일 기준 1박2일로 예약가능한 방 조회)
      */
-	List<roomVO> getAbleList() throws Exception;
+	List<RoomDTO> getAbleList() throws Exception;
 
 	 /**
      * @param dateMap 
 	 * @description 예약가능한 방 리스트 출력 (사용자 입력값에 따라 출력)
      */	
-	List<roomVO> getSearchList(HashMap<String, Date> dateMap) throws Exception;
+	List<RoomDTO> getSearchList(HashMap<String, Date> dateMap) throws Exception;
 
 
 }
