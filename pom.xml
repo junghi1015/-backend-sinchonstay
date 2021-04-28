@@ -10,11 +10,12 @@
     </parent>
     
     <groupId>com.example</groupId>
-    <artifactId>catbellrow</artifactId> <!-- 확인후 수정요망...! -->
+    <artifactId>staysinchon</artifactId> <!-- 21.04.28 인준 수정 -->
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>catbellrow</name> <!-- 확인후 수정요망...! -->
-    <description>jacob catbell project</description> <!-- 확인후 수정요망...! -->
+    <name>staysinchon</name> <!-- 21.04.28 인준 수정 -->
+    <description>staysinchon reservation project</description> <!-- 21.04.28 인준 수정 -->
+    
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -29,27 +30,35 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>2.1.4</version>
         </dependency>
-
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        
+		
+		<!-- DB설정 : MySQL -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        
+        <!-- Lombok 설정 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        
+        <!-- Tomcat 설정 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!-- 테스트도구 : Junit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -95,6 +104,21 @@
 	        <artifactId>jstl</artifactId>
 	        <version>1.2</version>
 	    </dependency> 
+	    
+	    <!--Security / 21.04.28 인준 -->		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+ 			<artifactId>spring-security-test</artifactId>
+ 			<scope>test</scope>
+		</dependency>		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
     </dependencies>
 
     <build>
