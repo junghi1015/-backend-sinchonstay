@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.sinchon.dto.ApplyReservationDTO;
+import com.project.sinchon.dto.UserDTO;
 
 /*
 *
@@ -20,11 +21,14 @@ import com.project.sinchon.dto.ApplyReservationDTO;
 public class UserDAO {
     @Autowired
     private SqlSession sqlSession;
-    private static final String namespace = "com.project.sinchon";
+    private static final String namespace = "com.project.sinchon.mapper.user";
     
 	public void updateUserDetails(ApplyReservationDTO applyReservationDTO) {
 		sqlSession.update(namespace + ".updateUserDetails", applyReservationDTO);
-		
+	}
+
+	public UserDTO findByUserId(String user_ID) {
+		return sqlSession.selectOne(namespace + ".findByUserId", user_ID);
 	}
 
 }

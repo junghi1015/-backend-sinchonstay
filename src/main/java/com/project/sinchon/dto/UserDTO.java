@@ -24,4 +24,5 @@ public class UserDTO {
     private String country;
     private int age_group;
     private String NA_foods;
+
 }
