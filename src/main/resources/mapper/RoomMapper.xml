@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.sinchon.mapper.RoomMapper">
+
 	<!-- 호스트가 등록한 모든 방 조회 -->
 	<select id="getList" resultType="com.project.sinchon.dto.RoomDTO">
 		SELECT room_ID, room_type, room_img, bed, bathroom, capacity, price_day, price_month

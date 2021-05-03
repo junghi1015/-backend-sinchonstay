@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.sinchon.mapper.HostMapper">
+	
+	<!-- [호스트페이지] 모든 방 조회 -->
+	<select id="getRoomList" resultType="com.project.sinchon.dto.RoomDTO">
+		SELECT *
+		FROM room;
+	</select>
+
+	<!-- [호스트페이지] 수정하고자 하는 방 정보 가져오기 -->
+	<select id="getRoomForChange" parameterType="int" resultType="com.project.sinchon.dto.RoomDTO">
+		SELECT *
+		FROM room
+		where room_ID = #{room_ID};
+	</select>
+
+	<!-- [호스트페이지] 예약관리 페이지 - 방 정보 수정하기 -->
+	<update id="updateRoom" parameterType="com.project.sinchon.dto.RoomDTO">
+		UPDATE room
+		SET
+			room_type = #{room_type},
+			room_img = #{room_img},
+			bed = #{bed},
+			bathroom = #{bathroom},
+			capacity = #{capacity},
+			price_day = #{price_day},
+		    price_month = #{price_month}
+		WHERE room_ID = #{room_ID};
+	</update>
+
+	<!-- [호스트페이지] 고객정보 관리 페이지 - 모든 고객 정보 가져오기 (Default : 최근 예약 순) -->
+	<select id="getGuestInfo" parameterType="int" resultType="com.project.sinchon.dto.UserDTO">
+		SELECT U.user_ID, U.firstname, count(R.user_ID), U.country, U.age_group, U.NA_foods, U.email
+		FROM sinchon.user U LEFT JOIN sinchon.reservation_info R ON U.user_ID = R.user_ID
+		GROUP BY U.user_ID;
+	</select>
+
+	<!-- 다시 짜야함 -->
+	<!-- [호스트페이지] 예약관리 페이지 - 모든 예약 정보 가져오기 (Default : 예약 신청일이 빠른 순) -->
+	<select id="getReservationInfo" parameterType="int" resultType="com.project.sinchon.dto.ReservationInfoDTO">
+		SELECT *
+		FROM reservation_info ri inner join reservation_state rs on ri.res_ID = rs.res_ID
+		where rs.state = #{state}
+		order by ri.res_date desc;
+	</select>
+
+	<!-- [호스트페이지] 예약관리 페이지 - 모든 예약 정보 가져오기 (추가 정렬 기준: 체크인 날짜) -->
+	<select id="getReservationInfoByCheckIn" parameterType="Map" resultType="com.project.sinchon.dto.ReservationInfoDTO">
+		SELECT *
+		FROM reservation_info ri inner join reservation_state rs on ri.res_ID = rs.res_ID
+		order by ri.check_in desc;
+
+	</select>
+
+	<!-- [호스트페이지] 예약관리 페이지 - 모든 예약 정보 가져오기 (추가 정렬 기준: 체크아웃 날짜) -->
+	<select id="getReservationInfoByCheckOut" parameterType="int" resultType="com.project.sinchon.dto.ReservationInfoDTO">
+		SELECT *
+		FROM reservation_info ri inner join reservation_state rs on ri.res_ID = rs.res_ID
+		order by ri.check_out desc;
+
+	</select>
+
+	<!-- [호스트페이지] 예약관리 페이지 - 예약 확정 하기 -->
+	<update id="updateReservation" parameterType="com.project.sinchon.dto.ReservationInfoDTO">
+		UPDATE reservation_state
+		SET	state = 2
+		WHERE res_ID = #{res_ID};
+	</update>
+
+	<!-- [호스트페이지] 예약관리 페이지 - 예약 취소 하기 -->
+	<update id="cancelReservation" parameterType="com.project.sinchon.dto.ReservationInfoDTO">
+		UPDATE reservation_state
+		SET	state = 3
+		WHERE res_ID = #{res_ID};
+	</update>
+
+</mapper>
