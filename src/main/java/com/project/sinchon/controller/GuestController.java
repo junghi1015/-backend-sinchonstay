@@ -79,7 +79,7 @@ public class GuestController {
      * @description [예약페이지] 예약가능한 방 검색(파라미터 : check in 날짜, check out 날짜) 
      */
     @GetMapping(value = "/rooms/search", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public List<RoomDTO> roomSearchList(@RequestParam("check_in") String checkIn,
+    public List<RoomDTO> searchRoomList(@RequestParam("check_in") String checkIn,
     									@RequestParam("check_out") String checkOut) throws Exception{
     	// 사용자가 입력한 날짜를 담을 map객체 생성
     	HashMap<String, Date> dateMap = new HashMap<String, Date>();

@@ -4,7 +4,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.sinchon.config.security.User;
 import com.project.sinchon.dto.ApplyReservationDTO;
+
 
 /*
 *
@@ -20,11 +22,24 @@ import com.project.sinchon.dto.ApplyReservationDTO;
 public class UserDAO {
     @Autowired
     private SqlSession sqlSession;
-    private static final String namespace = "com.project.sinchon";
+    private static final String namespace = "com.project.sinchon.mapper.user";
     
+    // 회원가입
+	public int registerUser(User userInfo) {
+		System.out.println("실행됨!!!!!----------D");
+		return sqlSession.insert(namespace + ".registerUser", userInfo);
+	}
+	
+	// 로그인 : 로그인 정보 비교를 위한 사용자 DB정보 가져오기
+	public User findByUserId(String user_ID) {
+		return sqlSession.selectOne(namespace + ".findByUserId", user_ID);
+	}
+
+	// 예약신청시 입력하는 사용자 정보 저장
 	public void updateUserDetails(ApplyReservationDTO applyReservationDTO) {
 		sqlSession.update(namespace + ".updateUserDetails", applyReservationDTO);
-		
 	}
+
+
 
 }
